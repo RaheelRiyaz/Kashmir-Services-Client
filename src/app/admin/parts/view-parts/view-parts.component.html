@@ -1,0 +1,76 @@
+<div>
+    <h1 class="alert alert-info text-center">Products List</h1>
+    <div class="row">
+      <div class="col-2">
+          <button (click)="showAll()" class="btn btn-outline-info">
+            Show All
+          </button>
+      </div>
+      <div class="col-4">
+          <!-- <label for="searchControl">Search By PartNo</label> -->
+          <input
+            type="text"
+            id="searchControl"
+            class="form-control mb-5"
+            name="date"
+            placeholder="Search By Part No."
+            #partControl
+            (keyup.enter)="searchByPartNo(partControl.value)"
+          />
+      </div>
+      <div class="col-4">
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          #select
+          (change)="filterByBrand(select.value)"
+        >
+          <option selected disabled>Filter By Brand</option>
+          <option value="">Select Brand</option>
+          <option value="" *ngFor="let brand of brands" value="{{brand.id}}">{{brand.name}} / {{brand.categoryName}}</option>
+        </select>
+      </div>
+      <div class="col-2">
+        <button class="btn btn-dark mt-3 me-5" style="float: right" routerLink="/admin/add-parts">
+            Add Parts
+          </button>
+      </div>
+    </div>
+ 
+    <div *ngIf="parts.length >0; else noPartBlock">
+    <table class="table table-hover mt-5">
+      <thead>
+        <tr>
+          <td>Serial No</td>
+          <td>Category</td>
+          <td>Brand</td>
+          <td>Part</td>
+          <td>Serial No</td>
+          <td>Quantity</td>
+          <td>Selling Price</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let part of parts; index as i">
+          <td>{{ i + 1 }}</td>
+          <td>{{ part.categoryName }}</td>
+          <td>{{ part.brandName }}</td>
+          <td>{{ part.partNo }}</td>
+          <td>{{ part.serialNo }}</td>
+          <td>{{ part.quantity }}</td>
+          <td>{{ part.sellPrice }}</td>
+          <!-- <td>{{ part.description }}</td> -->
+          <!-- <td>
+            <input type="checkbox" value="{{part.id}}" #chkBox (click)="addItems(chkBox)" />
+          </td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-template #noPartBlock>
+    <div class="alert alert-danger">
+      No Part Found
+    </div>
+  </ng-template>
+  </div>
+  

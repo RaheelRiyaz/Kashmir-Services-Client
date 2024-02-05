@@ -1,0 +1,27 @@
+<div class="container mt-1">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-bs-toggle="tab" routerLink="/changePassword" role="tab"
+                aria-controls="home" aria-selected="true">Change Password</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-bs-toggle="tab" routerLink="addressById" role="tab"
+                aria-controls="profile" aria-selected="false">Address</a>
+        </li>
+        <!-- <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" role="tab" aria-controls="contact"
+                aria-selected="false">Dead Link</a>
+        </li> -->
+        <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-bs-toggle="tab" routerLink="/customer/postAddress" role="tab"
+                aria-controls="profile" aria-selected="false">Post Address</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-bs-toggle="tab" routerLink="updateAddress" role="tab"
+                aria-controls="profile" aria-selected="false">Update Address</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <router-outlet></router-outlet>

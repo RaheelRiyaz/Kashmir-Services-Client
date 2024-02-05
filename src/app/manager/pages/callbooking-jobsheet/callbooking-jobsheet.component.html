@@ -1,0 +1,129 @@
+<button routerLink="/manager/bookings" class="btn btn-outline-danger mt-4">Back</button>
+<div *ngIf="jobsheets.length > 0; else elseBlock" class="tblRow">
+  <div class="card row my-5 mx-auto" *ngFor="let sheet of jobsheets">
+      <div class="card-header fs-3 text-center headingtbl">Job Sheet</div>
+      <div class="card-body">
+          <div class="row">
+              <div class="col-4 border my-2 py-3">
+                  <h6>Job No.: {{sheet.jobNo}}</h6>
+              </div>
+              <div class="col-4 border my-2 py-3">
+                  <h6>Assignment Date</h6>
+              </div>
+              <div class="col-4 border my-2 py-3">
+                  <h6>{{sheet.assignmentDate | date}}</h6>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-4 border my-2">
+                  <div class="row justify-content-between">
+                      <h6 class="col-9">Customer Name: {{sheet.customerName | uppercase}}</h6>
+                      <button data-bs-toggle="modal" data-bs-target="#exampleModal"
+                          (click)="getCustomerDetails(sheet.customerId)" class="btn btn-sm btn-outline-info col-3">
+                          View
+                      </button>
+                  </div>
+                  <h6>Brand Name: {{sheet.brandName | uppercase}}</h6>
+                  <h6>Serial No: {{sheet.serialNo}}</h6>
+                  <h6>Contact No.: {{sheet.phoneNumber}}</h6>
+              </div>
+              <div class="col-4 border my-2">
+                  <h6>Address: {{sheet.addressLine | titlecase}}</h6>
+                  <h6>Street: {{sheet.street | titlecase}}</h6>
+                  <h6>City: {{sheet.city | titlecase}}</h6>
+                  <h6>Postal Code: {{sheet.postalCode}}</h6>
+              </div>
+              <div class="col-4 border my-2">
+                  <button routerLink="/manager/view-invoice/{{sheet.callBookingId}}"
+                      class="btn btn-outline-info my-3">view Invoice</button>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-4 border my-2 py-3">
+                  <h6>Service Type: {{sheet.serviceType}}</h6>
+              </div>
+              <div class="col-4 border my-2 py-3">
+                  <h6>Expected Date</h6>
+              </div>
+              <div class="col-4 border my-2 py-3">{{sheet.expectedDate | date}}</div>
+          </div>
+          <div class="row">
+              <div class="col-4 border my-2 py-3">
+                  <h6>Engineer Name: {{sheet.engineerName | uppercase}}</h6>
+              </div>
+              <div class="col-4 border my-2 py-3">
+                  <h6>Call Status</h6>
+              </div>
+              <div class="col-4 border my-2 py-3">
+                  <h6 *ngIf="sheet.callStatus == 'Open'" class="text-danger blink_item"> {{sheet.callStatus}}</h6>
+                  <h6 *ngIf="sheet.callStatus == 'reallocated'" class="text-warning blink_item">
+                      {{sheet.callStatus}}</h6>
+                  <h6 *ngIf="sheet.callStatus == 'Close'" class="text-success"> {{sheet.callStatus}}</h6>
+                  <h6 *ngIf="sheet.callStatus == 'cancelled'" class="text-dark"> {{sheet.callStatus}}</h6>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-4 border my-2 py-3">
+                  <h6>Engineer Contact:{{sheet.engPhoneNumber}}</h6>
+              </div>
+              <div class="col-4 border my-2 py-3">
+                  <h6>Call Priority</h6>
+              </div>
+              <div class="col-4 border my-2 py-3">
+                  <span *ngIf="sheet.callPriority  > 1; else elsePriority " class="text-danger blink_item">
+                      {{sheet.callPriority}}</span>
+                  <ng-template #elsePriority>
+                      <span class="text-dark">{{sheet.callPriority }}</span>
+                  </ng-template>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-4 border my-2 py-3">
+                  <h6>Call Description</h6>
+                  <h6>Installation:</h6>
+              </div>
+              <div class="col-4 border my-2 py-3">
+                  <h6>{{sheet.callDescription}}</h6>
+              </div>
+              <div class="col-4 border my-2 py-3"></div>
+          </div>
+      </div>
+
+  </div>
+  
+</div>
+<ng-template #elseBlock>
+  <div class="alert alert-primary" role="alert">No Jobsheet found</div>
+</ng-template>
+
+<!-- Modal -->
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Customer Details
+        </h1>
+      </div>
+      <div class="modal-body">
+        <h5>Name :- {{ customerDetails.fullName }}</h5>
+        <h5>Fullname :- {{ customerDetails.fullName }}</h5>
+        <h5>Email :- {{ customerDetails.email }}</h5>
+        <h5>Gender :- {{ customerDetails.gender}}</h5>
+        <h5>Contact :- {{ customerDetails.phoneNumber}}</h5>
+        <h5>Username :- {{ customerDetails.username}}</h5>
+        <h5>Status :- {{ customerDetails.userStatus}}</h5>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

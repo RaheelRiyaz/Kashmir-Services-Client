@@ -1,0 +1,16 @@
+span{
+    font-size: 1rem;
+}
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin: 20px auto;
+}
+select{
+    width: 26%;
+}
+input{
+    width: 74%;
+}

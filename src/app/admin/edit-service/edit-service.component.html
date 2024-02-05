@@ -1,0 +1,122 @@
+<div class="container my-5">
+  <div class="mb-3">
+    <a class="text-primary" style="cursor: pointer">
+      <button class="btn btn-dark mx-2" routerLink="/admin/services">
+        Go Back
+      </button>
+    </a>
+  </div>
+  <div class="row justify-content-center container1">
+    <div class="col-lg-9">
+      <h1 class="mb-3 text-center" style="font-size: 25px">
+        <u>update Service</u>
+      </h1>
+      <form #myForm="ngForm">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="name" class="form-label"
+              ><strong>Service Name:</strong></label
+            >
+            <input
+              type="text"
+              [(ngModel)]="serviceRequest.name"
+              #name="ngModel"
+              name="name"
+              class="form-control"
+              id="name"
+              name="name"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="price" class="form-label"
+              ><strong>Price:</strong></label
+            >
+            <input
+              type="number"
+              [(ngModel)]="serviceRequest.charges"
+              #price="ngModel"
+              name="charges"
+              class="form-control"
+              id="price"
+          
+              required
+            />
+          </div>
+
+          <div class="col-md-12">
+            <label for="description" class="form-label"
+              ><strong>Description:</strong></label
+            >
+            <textarea
+              class="form-control"
+              [(ngModel)]="serviceRequest.description"
+              #description="ngModel"
+              name="description"
+              id="description"
+              name="description"
+              rows="5"
+              required
+            ></textarea>
+          </div>
+          <div class="col-md-6">
+            <label for="freeServiceDistance" class="form-label"
+              ><strong>Free Service Distance:</strong></label
+            >
+            <input
+              type="number"
+              [(ngModel)]="serviceRequest.freeServiceDistance"
+              #price="ngModel"
+              name="freeServiceDistance"
+              class="form-control"
+              id="freeServiceDistance"
+              name="freeServiceDistance"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="perKilometerCharge" class="form-label"
+              ><strong>Per Kilometer Charge:</strong></label
+            >
+            <input
+              type="number"
+              [(ngModel)]="serviceRequest.perKilometerCharge"
+              #price="ngModel"
+              name="perKilometerCharge"
+              class="form-control"
+              id="perKilometerCharge"
+              name="perKilometerCharge"
+              required
+            />
+          </div>
+
+          <div class="col-md-6">
+            <select
+              name="brandId"
+              id=""
+              class="form-control"
+              [(ngModel)]="serviceRequest.brandId"
+            >
+              <option value="" selected>Select Brand</option>
+              <option *ngFor="let brand of brands" [value]="brand.id">
+                {{ brand.name }}
+              </option>
+            </select>
+          </div>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-md-6">
+                <button
+                  class="btn btn-dark w-100 fw-bold"
+                  (click)="updateModel(myForm.value)"
+                >
+                  Update Service
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

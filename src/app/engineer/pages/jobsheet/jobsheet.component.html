@@ -1,0 +1,669 @@
+<!-- <div *ngIf="jobSheets.length > 0; else elseBlock">
+  <header>
+    <input
+      type="search"
+      class="form-control"
+      placeholder="Search By JobNo"
+      #input
+      (keyup.enter)="searchByJobNo(input.value)"
+      (input)="getAll(input.value)"
+    />
+    <select
+      class="form-select"
+      aria-label="Default select example"
+      #select
+      (change)="filterByStatus(select.value)"
+    >
+      <option selected disabled>Filter By Status</option>
+      <option value="1">Open</option>
+      <option value="2">Close</option>
+      <option value="3">Reallocated</option>
+      <option value="4">Cancelled</option>
+    </select>
+  </header>
+  <table
+    *ngFor="let sheet of jobSheets"
+    cellspacing="0"
+    cellpadding="0"
+    style="
+      border: 1px solid #000000;
+      border-collapse: collapse;
+      width: 90%;
+      margin: 10px auto;
+    "
+  >
+    <tbody>
+      <tr style="height: 14.9pt; -aw-height-rule: exactly">
+        <td
+          style="
+            width: 184.3pt;
+            border-right-style: solid;
+            border-right-width: 0.75pt;
+            border-bottom-style: solid;
+            border-bottom-width: 0.75pt;
+            padding-right: 5.03pt;
+            padding-left: 5.03pt;
+            vertical-align: top;
+          "
+        >
+          <p style="font-size: 8pt">
+            <span style="font-family: Calibri">Job No: {{ sheet.jobNo }}</span>
+          </p>
+        </td>
+        <td
+          style="
+            width: 212pt;
+            border-right-style: solid;
+            border-right-width: 0.75pt;
+            border-left-style: solid;
+            border-left-width: 0.75pt;
+            border-bottom-style: solid;
+            border-bottom-width: 0.75pt;
+            padding-right: 5.03pt;
+            padding-left: 5.03pt;
+            vertical-align: top;
+          "
+        >
+          <p style="font-size: 8pt">
+            <span style="font-family: Calibri">Assignment Date</span>
+          </p>
+        </td>
+        <td
+          style="
+            width: 39.3pt;
+            border-left-style: solid;
+            border-left-width: 0.75pt;
+            border-bottom-style: solid;
+            border-bottom-width: 0.75pt;
+            padding-right: 5.03pt;
+            padding-left: 5.03pt;
+            vertical-align: top;
+          "
+        >
+          <p style="font-size: 8pt">
+            <span style="font-family: Calibri">{{
+              sheet.assignmentDate | date
+            }}</span>
+          </p>
+        </td>
+      </tr>
+      <tr style="height: 109.8pt; -aw-height-rule: exactly">
+        <td
+          style="
+            width: 184.3pt;
+            border-top-style: solid;
+            border-top-width: 0.75pt;
+            border-right-style: solid;
+            border-right-width: 0.75pt;
+            border-bottom-style: solid;
+            border-bottom-width: 0.75pt;
+            padding-right: 5.03pt;
+            padding-left: 5.03pt;
+            vertical-align: top;
+          "
+        >
+          <p style="font-size: 8pt">
+            <span style="font-family: Calibri"
+              >CUSTOMER: {{ sheet.customerName | titlecase }}</span
+            >
+            <button
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              (click)="getCustomerDetails(sheet.customerId)"
+              class="btn btn-sm btn-info"
+            >
+              View
+            </button>
+          </p>
+
+          <p style="font-size: 8pt">
+            <span style="font-family: Calibri"
+              >Brand: {{ sheet.brandName | titlecase }}</span
+            >
+          </p>
+          <p style="font-size: 8pt">
+            <span style="font-family: Calibri"
+              >Serial No: {{ sheet.serialNo }}</span
+            >
+          </p>
+          <p style="font-size: 8pt">
+            <span style="font-family: Calibri"
+              >Phone: {{ sheet.phoneNumber }}</span
+            >
+          </p>
+        </td>
+        <td
+          style="
+            width: 212pt;
+            border-style: solid;
+            border-width: 0.75pt;
+            padding-right: 5.03pt;
+            padding-left: 5.03pt;
+            vertical-align: top;
+          "
+        >
+          <p style="font-size: 8pt">
+            <span style="font-family: Calibri"
+              >SITE ADDRESS: {{ sheet.addressLine | titlecase }}</span
+            >
+          </p>
+          <p style="font-size: 8pt">
+            <span style="font-family: Calibri"
+              >City: {{ sheet.city | titlecase }}</span
+            >
+          </p>
+          <p style="font-size: 8pt">
+            <span style="font-family: Calibri"
+              >Street: {{ sheet.street | titlecase }}</span
+            >
+          </p>
+          <p style="font-size: 8pt">
+            <span style="font-family: Calibri"
+              >Postalcode: {{ sheet.postalCode }}</span
+            >
+          </p>
+        </td>
+        <td
+          style="
+            width: 39.3pt;
+            border-top-style: solid;
+            border-top-width: 0.75pt;
+            border-left-style: solid;
+            border-left-width: 0.75pt;
+            border-bottom-style: solid;
+            border-bottom-width: 0.75pt;
+            padding-right: 5.03pt;
+            padding-left: 5.03pt;
+            vertical-align: top;
+          "
+        >
+
+        <div >
+          <button routerLink="/engineer/view-invoice/{{sheet.callBookingId}}" class="btn btn-outline-info" >view Invoice</button>
+        </div>
+        </td>
+      </tr>
+      <tr style="height: 16pt; -aw-height-rule: exactly">
+        <td
+          style="
+            width: 184.3pt;
+            border-top-style: solid;
+            border-top-width: 0.75pt;
+            border-right-style: solid;
+            border-right-width: 0.75pt;
+            border-bottom-style: solid;
+            border-bottom-width: 0.75pt;
+            padding-right: 5.03pt;
+            padding-left: 5.03pt;
+            vertical-align: top;
+          "
+        >
+          Service Type: {{ sheet.serviceType }}
+        </td>
+        <td
+          style="
+            width: 212pt;
+            border-style: solid;
+            border-width: 0.75pt;
+            padding-right: 5.03pt;
+            padding-left: 5.03pt;
+            vertical-align: top;
+          "
+        >
+          <p style="font-size: 8pt">
+            <span style="font-family: Calibri">Expected Date</span>
+          </p>
+        </td>
+        <td
+          style="
+            width: 39.3pt;
+            border-top-style: solid;
+            border-top-width: 0.75pt;
+            border-left-style: solid;
+            border-left-width: 0.75pt;
+            border-bottom-style: solid;
+            border-bottom-width: 0.75pt;
+            padding-right: 5.03pt;
+            padding-left: 5.03pt;
+            vertical-align: top;
+          "
+        >
+          <p style="font-size: 8pt">
+            <span style="font-family: Calibri">{{
+              sheet.expectedDate | date
+            }}</span>
+          </p>
+        </td>
+      </tr>
+      <tr style="height: 17.05pt; -aw-height-rule: exactly">
+        <td
+          style="
+            width: 184.3pt;
+            border-top-style: solid;
+            border-top-width: 0.75pt;
+            border-right-style: solid;
+            border-right-width: 0.75pt;
+            border-bottom-style: solid;
+            border-bottom-width: 0.75pt;
+            padding-right: 5.03pt;
+            padding-left: 5.03pt;
+            vertical-align: top;
+          "
+        ></td>
+        <td
+          style="
+            width: 212pt;
+            border-style: solid;
+            border-width: 0.75pt;
+            padding-right: 5.03pt;
+            padding-left: 5.03pt;
+            vertical-align: top;
+          "
+        >
+          <p style="font-size: 8pt">
+            <span style="font-family: Calibri">Call Status</span>
+          </p>
+        </td>
+        <td
+          style="
+            width: 39.3pt;
+            border-top-style: solid;
+            border-top-width: 0.75pt;
+            border-left-style: solid;
+            border-left-width: 0.75pt;
+            border-bottom-style: solid;
+            border-bottom-width: 0.75pt;
+            padding-right: 5.03pt;
+            padding-left: 5.03pt;
+            vertical-align: top;
+          "
+        >
+          <p
+            style=""
+            class="fs-5 blink_item"
+            *ngIf="sheet.callStatus == 'Open'"
+          >
+            <span
+              style="
+                font-family: Calibri;
+                font-weight: bold;
+                color: red;
+                font-size: 30px;
+              "
+              >{{ sheet.callStatus }}</span
+            >
+          </p>
+
+          <p
+            style=""
+            class="fs-5 blink_item"
+            *ngIf="sheet.callStatus == 'reallocated'"
+          >
+            <span
+              style="
+                font-family: Calibri;
+                font-weight: bold;
+                color: purple;
+                font-size: 30px;
+              "
+              >{{ sheet.callStatus }}</span
+            >
+          </p>
+
+          <p style="" class="fs-5" *ngIf="sheet.callStatus == 'Close'">
+            <span
+              style="
+                font-family: Calibri;
+                font-weight: bold;
+                color: green;
+                font-size: 30px;
+              "
+              >{{ sheet.callStatus }}</span
+            >
+          </p>
+          <p style="" class="fs-5" *ngIf="sheet.callStatus == 'cancelled'">
+            <span
+              style="
+                font-family: Calibri;
+                font-weight: bold;
+                color: black;
+                font-size: 30px;
+              "
+              >{{ sheet.callStatus }}</span
+            >
+          </p>
+
+
+        </td>
+      </tr>
+      <tr style="height: 16pt; -aw-height-rule: exactly">
+        <td
+          style="
+            width: 184.3pt;
+            border-top-style: solid;
+            border-top-width: 0.75pt;
+            border-right-style: solid;
+            border-right-width: 0.75pt;
+            border-bottom-style: solid;
+            border-bottom-width: 0.75pt;
+            padding-right: 5.03pt;
+            padding-left: 5.03pt;
+            vertical-align: top;
+          "
+        ></td>
+        <td
+          style="
+            width: 212pt;
+            border-style: solid;
+            border-width: 0.75pt;
+            padding-right: 5.03pt;
+            padding-left: 5.03pt;
+            vertical-align: top;
+          "
+        >
+          <p style="font-size: 8pt">
+            <span style="font-family: Calibri">Call Priority</span>
+          </p>
+        </td>
+        <td
+          style="
+            width: 39.3pt;
+            border-top-style: solid;
+            border-top-width: 0.75pt;
+            border-left-style: solid;
+            border-left-width: 0.75pt;
+            border-bottom-style: solid;
+            border-bottom-width: 0.75pt;
+            padding-right: 5.03pt;
+            padding-left: 5.03pt;
+            vertical-align: top;
+          "
+        >
+        <div  *ngIf="sheet.callStatus == 'Open'">
+          <p
+          style=""
+          class="fs-5 blink_item"
+          *ngIf="sheet.callPriority > 1; else elsePriority"
+        >
+          <span
+            style="
+              font-family: Calibri;
+              font-weight: bold;
+              color: red;
+              font-size: 30px;
+            "
+            >{{ sheet.callPriority }}</span
+          >
+        </p>
+        <ng-template #elsePriority>
+          <p style="" class="fs-5">
+            <span
+              style="
+                font-family: Calibri;
+                font-weight: bold;
+                color: blue;
+                font-size: 30px;
+              "
+              >{{ sheet.callPriority }}</span
+            >
+          </p>
+        </ng-template>
+        </div>
+         
+        </td>
+      </tr>
+      <tr style="height: 86.35pt; -aw-height-rule: exactly">
+        <td
+          style="
+            width: 184.3pt;
+            border-top-style: solid;
+            border-top-width: 0.75pt;
+            border-right-style: solid;
+            border-right-width: 0.75pt;
+            padding-right: 5.03pt;
+            padding-left: 5.03pt;
+            vertical-align: top;
+          "
+        >
+          <p style="font-size: 8pt">
+            <span style="font-family: Calibri">Call DESCRIPTION:</span>
+          </p>
+          <p style="font-size: 8pt">
+            <span style="font-family: Calibri">{{
+              sheet.callDescription
+            }}</span>
+          </p>
+        </td>
+        <td
+          style="
+            width: 212pt;
+            border-top-style: solid;
+            border-top-width: 0.75pt;
+            border-right-style: solid;
+            border-right-width: 0.75pt;
+            border-left-style: solid;
+            border-left-width: 0.75pt;
+            padding-right: 5.03pt;
+            padding-left: 5.03pt;
+            vertical-align: top;
+          "
+        >
+          <p style="font-size: 12pt">
+            <span style="-aw-import: ignore">&nbsp;</span>
+          </p>
+        </td>
+        <td
+          style="
+            width: 39.3pt;
+            border-top-style: solid;
+            border-top-width: 0.75pt;
+            border-left-style: solid;
+            border-left-width: 0.75pt;
+            padding-right: 5.03pt;
+            padding-left: 5.03pt;
+            vertical-align: top;
+          "
+        >
+          <p style="" class="fs-5" *ngIf="sheet.callStatus == 'Open'">
+            <span style="-aw-import: ignore"
+              >&nbsp;
+              <button
+                class="btn btn-outline-success mt-2"
+                (click)="book(sheet.assingedEngineerId, sheet.callBookingId)"
+              >
+                Schedule Date
+              </button>
+            </span>
+          </p>
+
+          <p style="" class="fs-5" *ngIf="sheet.callStatus == 'reallocated'">
+            <span style="-aw-import: ignore"
+              >&nbsp;
+              <button
+                class="btn btn-outline-success mt-2"
+                (click)="book(sheet.assingedEngineerId, sheet.callBookingId)"
+              >
+                Schedule Date
+              </button>
+            </span>
+          </p>
+
+          <p style="" class="fs-5" *ngIf="sheet.expectedDate != null">
+            <button
+              class="btn btn-outline-success ms-2 mt-2"
+              routerLink="visit/{{ sheet.assingedEngineerId }}/{{sheet.callStatus}}/{{sheet.callBookingId}}"
+            >
+              &nbsp;&nbsp;&nbsp;Call Visits &nbsp;&nbsp;&nbsp;
+            </button>
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #elseBlock>
+  <div class="alert alert-primary" role="alert">No Jobsheet for you yet!</div>
+</ng-template> -->
+<header>
+  <input
+    type="search"
+    class="form-control"
+    placeholder="Search By JobNo"
+    #input
+    (keyup.enter)="searchByJobNo(input.value)"
+    (input)="getAll(input.value)"
+  />
+  <select
+    class="form-select mx-1"
+    aria-label="Default select example"
+    #select
+    (change)="filterByStatus(select.value)"
+  >
+    <option selected disabled>Filter By Status</option>
+    <option value="1">Open</option>
+    <option value="2">Close</option>
+    <option value="3">Reallocated</option>
+    <option value="4">Cancelled</option>
+  </select>
+</header>
+<div *ngIf="jobSheets.length > 0; else elseBlock">
+  <div class="card row  my-5 mx-auto tblRow" *ngFor="let sheet of jobSheets">
+      <div class="card-header headingtbl fs-3 text-center">Job Sheet</div>
+      <div class="card-body">
+          <div class="row">
+              <div class="col-4 border my-2 py-3">
+                  <h6>Job No.: {{sheet.jobNo}}</h6>
+              </div>
+              <div class="col-4 border my-2 py-3">
+                  <h6>Assignemnt Date</h6>
+              </div>
+              <div class="col-4 border my-2 py-3">
+                  <h6>{{sheet.assignmentDate | date}}</h6>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-4 border my-2  py-3">
+                  <div class="row justify-content-between">
+                      <h6 class="col-9">Customer Name:{{sheet.customerName | uppercase}}</h6>
+                      <button data-bs-toggle="modal" data-bs-target="#exampleModal"
+                          (click)="getCustomerDetails(sheet.customerId)" class="btn btn-sm btn-outline-info col-3">
+                          View
+                      </button>
+                  </div>
+                  <h6>Brand Name:{{sheet.brandName | uppercase}}</h6>
+                  <h6>Serial No: {{sheet.serialNo}}</h6>
+                  <h6>Contact No.: {{sheet.phoneNumber}}</h6>
+              </div>
+              <div class="col-4 border my-2  py-3">
+                  <h6>Address:{{sheet.addressLine | titlecase}}</h6>
+                  <h6>Street:{{sheet.street | titlecase}}</h6>
+                  <h6>City:{{sheet.city | titlecase}}</h6>
+                  <h6>Postal Code:{{sheet.postalCode}}</h6>
+              </div>
+              <div class="col-4 border my-2  py-3">
+                      <button routerLink="/engineer/view-invoice/{{sheet.callBookingId}}" class="btn btn-outline-info" >view Invoice</button>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-4 border my-2 py-3">
+                  <h6>Service Type: {{sheet.serviceType}}</h6>
+              </div>
+              <div class="col-4 border my-2 py-3">
+                  <h6>Expected Date</h6>
+              </div>
+              <div class="col-4 border my-2 py-3">{{sheet.expectedDate | date}}</div>
+          </div>
+          <div class="row">
+              <div class="col-4 border my-2 py-3">
+                  <!-- <h6>Engineer Name:{{sheet.engineerName}}</h6> -->
+              </div>
+              <div class="col-4 border my-2 py-3">
+                  <h6>Call Status</h6>
+              </div>
+              <div class="col-4 border my-2 py-3">
+                  <h6 *ngIf="sheet.callStatus == 'Open'" class="text-danger blink_item"> {{sheet.callStatus}}</h6>
+                  <h6 *ngIf="sheet.callStatus == 'reallocated'" class="text-warning blink_item">
+                      {{sheet.callStatus}}</h6>
+                  <h6 *ngIf="sheet.callStatus == 'Close'" class="text-success"> {{sheet.callStatus}}</h6>
+                  <h6 *ngIf="sheet.callStatus == 'cancelled'" class="text-dark"> {{sheet.callStatus}}</h6>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-4 border my-2 py-3">
+                  <!-- <h6>Engineer Contact:{{sheet.engPhoneNumber}}</h6> -->
+              </div>
+              <div class="col-4 border my-2 py-3">
+                  <h6>Call Priority</h6>
+              </div>
+              <div class="col-4 border my-2 py-3">
+                  <span *ngIf="sheet.callPriority  > 1; else elsePriority " class="text-danger blink_item">
+                      {{sheet.callPriority}}</span>
+                  <ng-template #elsePriority>
+                      <span class="text-dark">{{sheet.callPriority }}</span>
+                  </ng-template>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-4 border my-2 py-3">
+                  <h6>Call Description</h6>
+              </div>
+              <div class="col-4 border my-2 py-3">
+                  <h6>{{sheet.callDescription}}</h6>
+              </div>
+              <div class="col-4 border my-2 py-3">
+                  <button *ngIf="sheet.callStatus == 'reallocated'" class="btn btn-outline-success col-5 mx-1"
+                      (click)="book(sheet.assingedEngineerId, sheet.callBookingId)">
+                      Schedule Date
+                  </button>
+                  <button *ngIf="sheet.callStatus == 'Open'" class="btn btn-outline-success col-5 mx-1"
+                      (click)="book(sheet.assingedEngineerId, sheet.callBookingId)">
+                      Schedule Date
+                  </button>
+                  <button class="btn btn-outline-success col-5" *ngIf="sheet.expectedDate != null"
+                      routerLink="visit/{{ sheet.assingedEngineerId }}/{{sheet.callStatus}}/{{sheet.callBookingId}}">
+                      Call Visits
+                  </button>
+              </div>
+          </div>
+      </div>
+
+  </div>
+
+</div>
+<ng-template #elseBlock>
+  <div class="alert alert-primary" role="alert">No Jobsheet for you Yet!</div>
+</ng-template>
+
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Customer Details
+        </h1>
+      </div>
+      <div class="modal-body">
+        <h5>Name :- {{ customerDetails.fullName }}</h5>
+        <h5>Fullname :- {{ customerDetails.fullName }}</h5>
+        <h5>Email :- {{ customerDetails.email }}</h5>
+        <h5>Gender :- {{ customerDetails.gender }}</h5>
+        <h5>Contact :- {{ customerDetails.phoneNumber }}</h5>
+        <h5>Username :- {{ customerDetails.username }}</h5>
+        <h5>Status :- {{ customerDetails.userStatus }}</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

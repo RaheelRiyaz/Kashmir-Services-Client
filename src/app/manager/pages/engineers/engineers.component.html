@@ -1,0 +1,31 @@
+<table class="table" *ngIf="engineers.length>0;else noEngineerSection">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Contact</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Jobrole</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let engineer of engineers">
+        <td>
+          {{
+            engineer.fullName.toLowerCase().startsWith("engr")
+              ? engineer.fullName
+              : ("Engr " + engineer.fullName | titlecase)
+          }}
+        </td>
+        <td>{{ engineer.phoneNumber }}</td>
+        <td>{{ engineer.gender }}</td>
+        <td>{{ engineer.jobRole }}</td>
+        <td  routerLink="/manager/jobsheet/{{engineer.engineerId}}"><span class="fa fa-eye"></span></td>
+
+      </tr>
+    </tbody>
+  </table>
+  <ng-template #noEngineerSection>
+      <div class="alert alert-primary" role="alert">
+          No Engineer Added yet in this category!
+        </div>
+  </ng-template>

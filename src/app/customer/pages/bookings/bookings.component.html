@@ -1,0 +1,61 @@
+<div class="container mt-5 p-2 d-flex flex-wrap">
+  <div class="card shadow p-3 mb-5 bg-body-tertiary rounded" *ngFor="let booking of bookings">
+    <div class="card-body">
+      <div class="job">
+        <h4>
+          Brand Name: {{ booking.brandName }}
+        </h4>
+        <h6 class="text-body-secondary mb-4">Category: {{booking.categoryName}}</h6>
+
+        Model Number: {{booking.modelNo}}
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Serial No</th>
+              <th scope="col">Type</th>
+              <th scope="col">Status</th>
+              <th scope="col">Expected Date</th>
+              <th scope="col">CallStatus</th>
+              <th scope="col">Eng Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{booking.requestDate|date}}</td>
+              <td>{{booking.serialNo}}</td>
+              <td>{{booking.serviceTypeName}}</td>
+
+              <td> {{booking.callBookingStatus}}</td>
+              <td>{{booking.expectedDate|date}}</td>
+              <td>{{booking.callStatus}}</td>
+              <td>{{booking.engRemarks}}</td>
+            </tr>
+          </tbody>
+          <div class="d-flex" *ngIf="booking.callBookingStatus != 'Completed'">
+              <button *ngIf="booking.callBookingStatus == 'InProgress' || booking.callBookingStatus == 'Pending'" class="btn btn-outline-danger mt-3" (click)="cancelBooking(booking.id)">
+                Cancel Booking
+              </button>
+              <!-- <button class="btn btn-outline-info  mt-3 ms-3" (click)="reschedule(booking.id)">
+                Reschedule
+              </button> -->
+              <button *ngIf="booking.callBookingStatus == 'Assigned'" class="btn btn-outline-danger mt-3 ms-3" (click)="setReminder(booking.id)">
+                Reminder
+              </button>
+          </div>
+
+
+          <div class="d-flex" *ngIf="booking.callBookingStatus == 'Completed'  || booking.callBookingStatus == 'Assigned'">
+           
+            <button class="mt-3 ms-3 btn btn-outline-info" routerLink="/customer/view-invoice/{{booking.id}}">
+              Invoice
+            </button>
+
+          </div>
+
+
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

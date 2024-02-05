@@ -1,0 +1,83 @@
+<nav class="navbar">
+  <ul>
+    <li><a routerLink="dashboard" style="cursor: pointer; color: white; font-size: 20px;">Dashboard</a></li>
+  </ul>
+</nav>
+<div class=" p-5 mb-5 mt-5">
+   
+    <section>
+      <div class="row">
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card" style="background-color:rgb(20 27 30);color: white;">
+            <div class="card-body">
+              <p class="text-uppercase small mb-2">
+                <strong>Total Services</strong>
+              </p>
+              <h5 class="mb-0">
+                <strong>{{length}}</strong>
+              </h5>
+              <button class="btn btn-dark mt-4 myBtn" (click)="getServices()">View Services</button>
+
+              <hr />
+            </div>
+          </div>
+          <!-- Card -->
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card" style="background-color:rgb(20 27 30);color: white;">
+            <div class="card-body">
+              <p class="text-uppercase small mb-2">
+                <strong>Total Enginers</strong>
+              </p>
+              <h5 class="mb-0">
+                <strong>23</strong>
+                
+              </h5>
+              <button class="btn btn-dark  mt-4 p-2 myBtn">View Enginers</button>
+
+
+              <hr />
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card" style="background-color:rgb(20 27 30);color: white;">
+            <div class="card-body">
+              <p class="text-uppercase small mb-2">
+                <strong>Services Done</strong>
+              </p>
+              <h5 class="mb-0">
+                <strong>3</strong>
+                
+              </h5>
+              <button class="btn btn-dark  mt-4 myBtn">View Reports</button>
+
+
+              <hr />
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card" style="background-color:rgb(20 27 30);color: white;">
+            <div class="card-body">
+              <p class="text-uppercase small mb-2">
+                <strong>Pending Serveices</strong>
+              </p>
+              <h5 class="mb-0">
+                <strong>23</strong>
+                
+              </h5>
+              <button class="btn btn-dark  mt-4 myBtn">View Pending Services</button>
+
+
+              <hr />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    

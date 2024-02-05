@@ -1,0 +1,154 @@
+<section class="text-center mt-5 ms-5">
+  <div class="row">
+    <div class="col-lg-6 mt-2">
+      <app-location-selector></app-location-selector>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="h3 text-dark text-center mt-3">ADD ADDRESS</div>
+      <form #addressForm="ngForm" class="row mt-4">
+        <div class="col-6">
+          <div class="form-group mt-3 mb-3">
+            <input
+              type="text"
+              name="state"
+              id="state"
+              #state="ngModel"
+              class="form-control"
+              [(ngModel)]="postAddressModel.state"
+              required
+              placeholder="Your state name"
+              [class.is-invalid]="state.touched && state.invalid"
+            />
+            <div class="text-danger" *ngIf="state.touched && state.invalid">
+              <div *ngIf="state.errors && state.errors['required']">
+                Please enter your state name
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mt-3 mb-3">
+            <input
+              type="text"
+              name="city"
+              id="city"
+              #city="ngModel"
+              class="form-control"
+              [(ngModel)]="postAddressModel.city"
+              required
+              placeholder="Your city name"
+              [class.is-invalid]="city.touched && city.invalid"
+            />
+            <div class="text-danger" *ngIf="city.touched && city.invalid">
+              <div *ngIf="city.errors && city.errors['required']">
+                Please enter your city name
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mt-3 mb-3">
+            <input
+              type="text"
+              name="region"
+              id="region"
+              class="form-control"
+              #region="ngModel"
+              placeholder="Your Region"
+              [(ngModel)]="postAddressModel.region"
+              required
+              [class.is-invalid]="region.touched && region.invalid"
+            />
+            <div class="text-danger" *ngIf="region.touched && region.invalid">
+              <div *ngIf="region.errors && region.errors['required']">
+                Please enter your region name
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="form-group mt-3 mb-3">
+            <input
+              type="text"
+              name="street"
+              id="street"
+              #street="ngModel"
+              class="form-control"
+              [(ngModel)]="postAddressModel.street"
+              required
+              placeholder="Your street name"
+              [class.is-invalid]="state.touched && state.invalid"
+            />
+            <div class="text-danger" *ngIf="state.touched && state.invalid">
+              <div *ngIf="state.errors && state.errors['required']">
+                Please enter your state name
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mt-3 mb-3">
+            <input
+              type="number"
+              name="postalCode"
+              id="postalCode"
+              #postalCode="ngModel"
+              [(ngModel)]="postAddressModel.postalCode"
+              required
+              class="form-control"
+              placeholder="Your Postal Code"
+              [class.is-invalid]="postalCode.touched && postalCode.invalid"
+            />
+            <div
+              class="text-danger"
+              *ngIf="postalCode.touched && postalCode.invalid"
+            >
+              <div *ngIf="postalCode.errors && postalCode.errors['required']">
+                Please enter your Postal/Pin Code
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mt-3 mb-3">
+            <input
+              type="text"
+              name="addressLine"
+              id="addressLine"
+              #addressLine="ngModel"
+              [(ngModel)]="postAddressModel.addressLine"
+              placeholder="Your AddressLine"
+              class="form-control"
+              required
+              [class.is-invalid]="addressLine.touched && addressLine.invalid"
+            />
+            <div
+              class="text-danger"
+              *ngIf="addressLine.touched && addressLine.invalid"
+            >
+              <div *ngIf="addressLine.errors && addressLine.errors['required']">
+                Please enter your Address Line
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4 mb-5 form-group text-center">
+          <button
+            class="btn btn-secondary submit-button"
+            [disabled]="addressForm.invalid"
+            (click)="addAddress()"
+          >
+            Add Address
+          </button>
+        </div>
+
+        <div class="text-center text-success" *ngIf="successMessage">
+          Address added successfully
+        </div>
+
+        <div class="text-center text-danger" *ngIf="errorMessage">
+          Can't add address
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

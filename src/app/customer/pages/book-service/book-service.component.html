@@ -1,0 +1,54 @@
+  <div class="card m-5" style="width: 28rem">
+    <div class="card-body">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput"
+        placeholder="Model Number" name="modelNo" [(ngModel)]="booking.modelNo"
+        required= />
+        <label for="floatingInput">Model No</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          id="floatingPassword"
+          placeholder="Serial Number"
+          name="serialNo"
+          [(ngModel)]="booking.serialNo"
+          required
+        />
+        <label for="floatingPassword">Serial No</label>
+      </div>
+      <div class="d-flex mt-3">
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          [(ngModel)]="booking.addressId"
+          required
+        >
+          <option selected value="" disabled>Choose Your Address</option>
+          <option value="{{ address.id }}" *ngFor="let address of addresses">
+            {{ address.addressLine }}( {{address.street}} )
+          </option>
+        </select>
+        <button
+          class="btn btn-sm btn-dark"
+          routerLink="/customer/postAddress"
+          (click)="navigateAndStore()"
+        >
+          +
+        </button>
+      </div>
+      <div class="form-floating mt-3">
+        <textarea
+          class="form-control"
+          placeholder="Leave a description here"
+          id="floatingTextarea"
+          name="description"
+          [(ngModel)]="booking.description"
+          required
+        ></textarea>
+        <label for="floatingTextarea">Description</label>
+      </div>
+    </div>
+    <button class="btn btn-success" (click)="bookService()">Book Now</button>
+  </div>

@@ -1,0 +1,10 @@
+.navbar{
+    height: 3rem;
+    background: rgb(20 27 30);
+    width: 100%;
+    margin-right: 200px;
+}
+.navbar ul li a{
+    text-decoration: none;
+    list-style: none;
+}

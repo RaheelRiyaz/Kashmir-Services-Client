@@ -1,0 +1,162 @@
+<nav class="navbar">
+  <ul>
+    <li>
+      <a routerLink="dashboard" style="cursor: pointer; color: white; font-size: 20px">Categories</a>
+    </li>
+  </ul>
+</nav>
+<div></div>
+<button class="btn btn-dark mt-3 me-5" style="float: right" (click)="AddCategory()" *ngIf="showMe">
+  Add Category
+</button>
+<div class="container mt-5 ms-2 flex-cards" *ngIf="showCard">
+  <div class="row d-flex flex wrap-wrap">
+    <div class="card m-3 item-card card-block" style="width: 23rem" *ngFor="let category of categories">
+      <img src="{{ baseUrl + category.filePath }}" alt="No preview" />
+      <h5 class="item-card-title mt-3 mb-3 mx-2">
+        <strong>Name</strong>: {{ category.name }}
+      </h5>
+      <p class="card-text mx-2">
+        <strong>Description</strong>: {{ category.description }}
+      </p>
+      <button class="btn btn-success mb-2" routerLink="/admin/category/brands/{{ category.id }}">
+        View Brands
+      </button>
+      <select class="form-select mb-2" aria-label="Default select example" [(ngModel)]="jobRole.engineerId"
+        (change)="assignEngineer(category.id)">
+        <option selected value="">Assign Engineer</option>
+        <option value="{{ engineer.id }}" *ngFor="let engineer of engineers">
+          {{ engineer.fullName }}
+        </option>
+      </select>
+      <div style="margin-left: 80px" class="mb-3 myDiv">
+        <button class="btn btn-primary me-2" (click)="deleteCategory(category.id)">
+          Delete
+        </button>
+        <button class="btn btn-dark" (click)="editCategory(category.id)">
+          Edit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row justify-content-center container1 mt-5 mx-3" *ngIf="showCat">
+  <div class="mb-3">
+    <a (click)="back()" class="text-primary" style="cursor: pointer">
+      <button class="btn btn-dark mx-4" (click)="hello()">Go Back</button>
+    </a>
+  </div>
+  <div class="col-lg-9">
+    <h1 class="mb-3 text-center" style="font-size: 25px">
+      <u>Add New Category</u>
+    </h1>
+
+    <form #myForm="ngForm" (ngSubmit)="form($event)">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="your-name" class="form-label">Category Name:</label>
+          <input type="text" (input)="check(category.value)" #category="ngModel" name="name"
+            [(ngModel)]="categoryRequest.name" class="form-control" required #categoryName="ngModel" />
+          <div *ngIf="checkCategory" class="text-danger">
+            <p>Category Already Exist.please try another one</p>
+          </div>
+          <div *ngIf="categoryName.touched&&category.invalid">
+            <div *ngIf="categoryName.errors?.['required']" class="text-danger">*Name is Required</div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="your-surname" class="form-label">Description:</label>
+          <input type="text" [(ngModel)]="categoryRequest.description" name="description" class="form-control"
+            id="your-surname" required #categoryDes="ngModel" />
+          <div *ngIf="categoryDes.touched&&categoryDes.invalid">
+            <div *ngIf="categoryDes.errors?.['required']" class="text-danger fs-6">
+              *Description is Required
+            </div>
+          </div>
+        </div>
+        <div>
+          <select class="form-select" [(ngModel)]="categoryRequest.managerId"
+            name="managerId" #managerId="ngModel" required>
+            <option selected value="">Manager</option>
+            <option value="{{ manager.id }}" *ngFor="let manager of managers">
+              {{ manager.name | titlecase }}
+            </option>
+          </select>
+          <div *ngIf="managerId.touched && managerId.invalid">
+            <div *ngIf="managerId.errors?.['required']" class="text-danger">*Please Select
+              Manager</div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="file" class="form-label">File</label>
+          <input type="file" name="File" class="form-control" id="file" required #categoryFile="ngModel" ngModel accept=".jpg,.jpeg,.png"/>
+          <div *ngIf="categoryFile.touched&&categoryFile.invalid"
+            >
+          <div *ngIf="categoryFile.errors?.['required']" class="text-danger fs-6">*Image is Required</div>
+          <div *ngIf="categoryFile.errors?.['accept']" class="text-danger fs-6">*JPG,JPEG,PNG Allowed</div>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="row">
+            <div class="col-md-6">
+              <button class="btn btn-dark w-100 fw-bold" [disabled]="myForm.invalid">
+                Add Category
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row justify-content-center container1 mt-5 mx-3" *ngIf="showCategory">
+  <div class="mb-3">
+    <a (click)="back()" class="text-primary" style="cursor: pointer">
+      <button class="btn btn-dark mx-4">Go Back</button>
+    </a>
+  </div>
+  <div class="col-lg-9">
+    <h1 class="mb-3 text-center" style="font-size: 25px">
+      <u>Update Category</u>
+    </h1>
+    <form #myForm="ngForm" (ngSubmit)="updateCategory($event)">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="your-name" class="form-label">Category Name:</label>
+          <input type="text" name="name" [(ngModel)]="categoryUpdateRequest.name" class="form-control" id="your-name"
+            required />
+        </div>
+        <div class="col-md-6">
+          <label for="your-surname" class="form-label">Description:</label>
+          <input type="text" [(ngModel)]="categoryUpdateRequest.description" name="description" class="form-control"
+            id="your-surname" required />
+        </div>
+        <select class="form-select" aria-label="Default select example" [(ngModel)]="categoryUpdateRequest.managerId"
+          name="managerId">
+          <option selected>Manager</option>
+          <option value="{{ manager.id }}" *ngFor="let manager of managers">
+            {{ manager.name }}
+          </option>
+        </select>
+        <div class="col-md-6">
+          <label for="your-surname" class="form-label">File</label>
+          <input type="file" name="file" class="form-control" id="your-surname" required />
+        </div>
+
+        <div class="col-12">
+          <div class="row">
+            <div class="col-md-6">
+              <button class="btn btn-dark w-100 fw-bold">
+                Update Category
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

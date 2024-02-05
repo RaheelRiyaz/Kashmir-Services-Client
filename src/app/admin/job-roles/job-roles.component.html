@@ -1,0 +1,28 @@
+<div
+  class="roles-section mt-5 d-flex justify-content-center align-items-center flex-wrap"
+  *ngIf="roles.length > 0; else elseBlock"
+>
+  <div class="card m-2" style="width: 28rem" *ngFor="let role of roles">
+    <div class="card-body">
+      <h5 class="card-title">{{ role.jobRole }}</h5>
+      <h6 class="card-subtitle mb-4 text-body-secondary">
+        Manager: {{ role.managerName }}
+      </h6>
+      <h6 class="card-subtitle mb-4 text-body-secondary">
+        Manager-Phonenumber: {{ role.managerPhoneNumber }}
+      </h6>
+      <h6 class="card-subtitle mb-4 text-body-secondary">
+        Email: {{ role.email }}
+      </h6>
+      <p class="card-text">
+        {{ role.description }}
+      </p>
+    </div>
+  </div>
+</div>
+<ng-template #elseBlock>
+  <div class="alert alert-primary" role="alert">
+    No Jobrole for you yet!
+  </div>
+</ng-template>
+

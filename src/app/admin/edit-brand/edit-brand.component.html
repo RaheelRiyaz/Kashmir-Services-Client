@@ -1,0 +1,45 @@
+<div class="row justify-content-center container1 mt-5 mx-3">
+    <div class="mb-3">
+      <a  routerLink="/admin/brands" class="text-primary" style="cursor: pointer;">
+        <button class="btn btn-dark mx-4">Go Back</button>
+      </a>
+    </div>
+    <div class="col-lg-9" >
+      <h1 class="mb-3 text-center" style="font-size: 25px;"><u>Update Brand</u></h1>
+      <form #myForm="ngForm">
+        <div class="row g-3">
+          
+          <div class="col-md-12">
+            <label for="your-name" class="form-label">Brand Name:</label>
+            <input type="text"
+            name="name"
+            [(ngModel)]="brand.name"
+             
+             class="form-control" id="your-name" name="your-name" required>
+          </div>
+          <div class="col-md-12">
+            <label for="your-message" class="form-label">Description</label>
+            <textarea class="form-control"
+            [(ngModel)]="brand.description"
+            #description="ngModel"
+            name="description"
+             id="your-message" name="your-message" rows="5" required></textarea>
+          </div>
+          <select name="categoryId" class="form-select" aria-label="Default select example" [(ngModel)]="brand.categoryId">
+            <option selected>Choose Category</option>
+            <option value="{{category.id}}" *ngFor="let category of categories">{{category.name}}</option>
+          </select>
+         
+         
+
+          <div class="col-12">
+            <div class="row">
+              <div class="col-md-6">
+                <button class="btn btn-dark w-100 fw-bold" (click)="updateBrand(brand.id)">update</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

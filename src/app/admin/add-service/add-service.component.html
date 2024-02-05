@@ -1,0 +1,147 @@
+<div class="container my-5">
+  <div class="mb-3">
+    <a class="text-primary" style="cursor: pointer">
+      <button class="btn btn-dark mx-2" routerLink="/admin/services">
+        Go Back
+      </button>
+    </a>
+  </div>
+  <div class="row justify-content-center container1">
+    <div class="col-lg-9">
+      <h1 class="mb-3 text-center" style="font-size: 25px">
+        <u>Add New Service</u>
+      </h1>
+      <form #myForm="ngForm">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="your-name" class="form-label"
+              ><strong>Service Name:</strong></label
+            >
+            <input
+              type="text"
+              (change)="checkName(name.value)"
+              [(ngModel)]="addServiceModel.name"
+              #name="ngModel"
+              name="name"
+              class="form-control"
+              id="your-name"
+              name="your-name"
+              required
+            />
+            <div *ngIf="nameExist" class="text-danger">
+              <p>Name Already Exist.please choose Another one</p>
+            </div>
+            <div *ngIf="name.touched&&name.invalid">
+            <div *ngIf="name.errors?.['required']" class="text-danger fs-6">*Please Mention Service Name </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="your-surname" class="form-label"
+              ><strong>Charges:</strong></label
+            >
+            <input
+              type="number"
+              [(ngModel)]="addServiceModel.charges"
+              #price="ngModel"
+              placeholder="Charges"
+              name="charges"
+              class="form-control"
+              id="your-surname"
+              required
+            />
+            <div *ngIf="price.touched&&price.invalid">
+            <div *ngIf="price.errors?.['required']" class="text-danger fs-6">*Please Add Charges For Service</div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="your-message" class="form-label"
+              ><strong>Description:</strong></label
+            >
+            <textarea
+              class="form-control"
+              [(ngModel)]="addServiceModel.description"
+              #description="ngModel"
+              name="description"
+              id="your-message"
+              name="description"
+              rows="5"
+              required
+            ></textarea>
+            <div *ngIf="description.touched&&description.invalid">
+            <div *ngIf="description.errors?.['required']" class="text-danger fs-6">*Please Add Description For Service</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="your-surname" class="form-label"
+              ><strong>Free Service Distance:</strong></label
+            >
+            <input
+              type="number"
+              [(ngModel)]="addServiceModel.freeServiceDistance"
+              #serviceDistance="ngModel"
+              name="serviceDistance"
+              class="form-control"
+              id="your-surname"
+              required
+            />  
+            <div *ngIf="serviceDistance.touched&&serviceDistance.invalid">
+            <div class="text-danger fs-6" *ngIf="serviceDistance.errors?.['required']">*Please Mention Free Service Distance</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="your-surname" class="form-label"
+              ><strong>Per Kilometer Charge:</strong></label
+            >
+            <input
+              type="number"
+              [(ngModel)]="addServiceModel.perKilometerCharge"
+              #distancePay="ngModel"
+              name="kilometerCharge"
+              class="form-control"
+              id="your-surname"
+              required
+            />
+            <div *ngIf="distancePay.touched&&distancePay.invalid">
+              <div *ngIf="distancePay.errors?.['required']" class="text-danger fs-6">*Please Mention Charges /Km </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mt-5">
+          
+            <select
+            #brand="ngModel"
+              name="brandId"
+              id=""
+              class="form-select"
+              [(ngModel)]="addServiceModel.brandId"
+              required
+            >
+              <option value="" selected>Select Brand</option>
+              <option *ngFor="let brand of brands" [value]="brand.id">
+                {{ brand.name }} ( {{brand.categoryName}} )
+              </option>
+            </select>
+            <div *ngIf="brand.touched&&brand.invalid">
+            <div *ngIf="brand.errors?.['required']" class="text-danger fs-6">*Please Select Brand</div>
+          </div>
+          </div>
+
+          <div class="col-12">
+            <div class="row">
+              <div class="col-md-6">
+                <button
+                  class="btn btn-dark w-100 fw-bold"
+                  (click)="postModel()"
+                  [disabled]="myForm.invalid"
+                >
+                  Add Service
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

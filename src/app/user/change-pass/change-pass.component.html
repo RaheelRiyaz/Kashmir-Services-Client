@@ -1,0 +1,49 @@
+<div class="col-md-6 offset-md-3">
+    <span class="anchor" id="formChangePassword"></span>
+    <hr class="mb-5">
+
+    <!-- form card change password -->
+    <div class="card card-outline-secondary">
+        <div class="card-header">
+            <h3 class="mb-0">Reset Your Password</h3>
+        </div>
+        <div class="card-body">
+            <form class="form" role="form" autocomplete="off" #myForm="ngForm">
+                <div class="form-group">
+                    <label for="inputPasswordNew">New Password</label>
+                    <input type="password" 
+                    [(ngModel)]="resetModel.newPassword"
+                    #newpassword="ngModel"
+                    name="=newpassword"
+                    class="form-control" id="inputPasswordNew" required
+                    [class.is-invalid]="newpassword.touched && newpassword.invalid"
+                    >
+                    <div *ngIf="newpassword.touched && newpassword.invalid" class="text-danger">
+                     <div *ngIf="newpassword.errors && newpassword.errors['required']">
+                      Enter New Password
+                     </div>
+                    </div>
+                    
+                </div>
+                <div class="form-group">
+                    <label for="inputPasswordNewVerify">Confirm Password</label>
+                    <input type="password"
+                    [(ngModel)]="resetModel.confrimPassword"
+                    #confirmpassword="ngModel"
+                    name="=confrimpassword"
+                     class="form-control" id="inputPasswordNewVerify" required
+                     [class.is-invalid]="confirmpassword.touched && confirmpassword.invalid"
+                     >
+                     <div *ngIf="confirmpassword.touched && confirmpassword.invalid" class="text-danger">
+                        <div *ngIf="confirmpassword.errors && confirmpassword.errors['required']">
+                         Enter New Password
+                        </div>
+                       </div>
+                   
+                </div>
+                <div class="form-group">
+                    <button  class="btn btn-success btn-lg float-right" [disabled]="myForm.invalid" (click)="resetPassword()">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>

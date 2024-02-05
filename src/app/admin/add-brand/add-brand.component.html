@@ -1,0 +1,80 @@
+<div class="row justify-content-center container1 mt-5 mx-3">
+  <div class="mb-3">
+    <a routerLink="/admin/brands" class="text-primary" style="cursor: pointer">
+      <button class="btn btn-dark mx-4">Go Back</button>
+    </a>
+  </div>
+  <div class="col-lg-9">
+    <h1 class="mb-3 text-center" style="font-size: 25px">
+      <u>Add New Brand</u>
+    </h1>
+    <!-- (blur)="checkBrandName(brandName.value)" -->
+    <form #myForm="ngForm">
+      <div class="row g-3">
+        <div class="col-md-12">
+          <label for="your-name" class="form-label">Brand Name:</label>
+          <input
+            type="text"
+            name="name"
+            #brandName="ngModel"
+            [(ngModel)]="postBrand.name"
+          
+            class="form-control"
+            id="your-name"
+            required
+          />
+          <div *ngIf="brandName.invalid&&brandName.touched">
+          <div *ngIf="brandName.errors?.['required']" class="text-danger fs-6">*Please Mention Your Brand Name</div>
+          </div>
+          <div *ngIf="checkBrands" class="text-danger">
+            <p>Brands Already Exists.please choose Another one</p>
+          </div>
+          <div></div>
+        </div>
+        <div class="col-md-12">
+          <label for="your-message" class="form-label">Description</label>
+          <textarea
+            class="form-control"
+            [(ngModel)]="postBrand.description"
+            #description="ngModel"
+            name="description"
+            id="your-message"
+            rows="5"
+            required
+          ></textarea>
+          <div *ngIf="description.invalid&&description.touched">
+          <div *ngIf="description.errors?.['required']" class="text-danger fs-6">*Please Add Description</div>
+          </div>
+        </div>
+        <div>
+        <select
+          name="categoryId"
+          class="form-select"
+          aria-label="Default select example"
+          required
+          [(ngModel)]="postBrand.categoryId"
+          #category="ngModel"
+        >
+          <option value="" selected>Choose Category</option>
+          <option value="{{ category.id }}" *ngFor="let category of categories">
+            {{ category.name }}
+          </option>
+        </select>
+        <div *ngIf="category.invalid&&category.touched">
+        <div *ngIf="category.errors?.['required']" class="text-danger fs-6">*Please Choose Category</div>
+      </div>
+      </div>
+
+        <div class="col-12">
+          <div class="row">
+            <div class="col-md-6">
+              <button class="btn btn-dark w-100 fw-bold" (click)="postModel()" [disabled]="myForm.invalid">
+                Add Brand
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

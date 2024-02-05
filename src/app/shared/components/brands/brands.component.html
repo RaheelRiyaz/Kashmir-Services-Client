@@ -1,0 +1,19 @@
+<div class="d-flex justify-content-evenly mt-5 align-items-center flex-wrap">
+  <div class="card m-3" style="width: 18rem" *ngFor="let brand of brands">
+    <div class="card-body">
+      <h5 class="card-title">Brand Name:</h5>
+      <h6 class="card-subtitle mb-2 text-body-secondary">{{ brand.name }}</h6>
+      <button
+        [routerLink]="
+          !token
+            ? ['/category/brand/services', brand.id]
+            : ['/customer/category/brands/services', brand.id]
+        "
+        routerLink="/{{ brand.id }}"
+        class="btn btn-success"
+      >
+        Check Services
+      </button>
+    </div>
+  </div>
+</div>

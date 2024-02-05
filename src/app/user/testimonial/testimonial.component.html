@@ -1,0 +1,44 @@
+<!-- 
+#### EDIT
+I built this slider when I first started to learn JS, you can rebuild it with more readable, simple and less code, I'm too lazy to update it, sorry :) 
+-->
+
+<!-- 
+	use the left and right arrow keys on your keyboard or just swipe left and right on your smart phone to interact with the slider
+-->
+
+<section id="testim" class="testim">
+  <!--         <div class="testim-cover"> -->
+  <div class="wrap">
+    <button
+      id="right-arrow"
+      class="arrow right fa fa-chevron-right"
+      (click)="index = index + 1"
+      [disabled]="index === testimonials.length - 1"
+    ></button>
+    <button
+      id="left-arrow"
+      class="arrow left fa fa-chevron-left"
+      (click)="index = index - 1"
+      [disabled]="index === 0"
+    ></button>
+    <div id="testim-content" class="cont">
+      <div class="active">
+        <div class="img">
+          <img
+            src="{{
+              testimonials[index].filePath
+                ? testimonials[index].filePath
+                : 'https://img.freepik.com/premium-vector/social-media-user-profile-icon-video-call-screen_97886-10046.jpg'
+            }}"
+            alt=""
+          />
+        </div>
+        <h2>{{ testimonials[index].fullName }}</h2>
+        <p class="text-dark">
+          {{ testimonials[index].description }}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

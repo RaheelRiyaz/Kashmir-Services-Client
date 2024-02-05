@@ -1,0 +1,8 @@
+<input
+  type="text"
+  class="form-control mb-2"
+  [(ngModel)]="searchInput"
+  placeholder="Search for a location"
+  (keyup.enter)="searchLocation()"
+/>
+<div id="map" style="height: 400px"></div>

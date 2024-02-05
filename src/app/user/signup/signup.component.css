@@ -1,0 +1,73 @@
+
+.note{
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body {  
+  margin: 0;  
+  font-family: 'Lato', sans-serif;  
+  font-size: 12px;  
+  line-height: 1.8em;  
+  text-transform: none;  
+  letter-spacing: .075em;  
+  font-weight: bold;  
+  font-style: normal;  
+  text-decoration: none;  
+  color: #e7bd74;  
+  background-color: rgba(34,28,28);  
+  display: block;  
+}  
+.title {  
+  margin-top: 2rem;  
+  margin-bottom: 1rem;  
+}  
+.form-content  
+{  
+    padding: 4%;  
+    margin-bottom: 2%; 
+    height: 60vh; 
+    box-shadow: 4px 2px 10px gray;
+}  
+.form-control {  
+    border-radius: 1.5rem;  
+}  
+.btnSubmit  
+{  
+    border: none;  
+    border-radius: 1.5rem;  
+    padding: 1%;  
+    width: 100%;  
+    cursor: pointer;  
+}  
+.btn-primary {
+  color: #fff;
+  background-color:#574949;;
+  border-color: #007bff;
+  width: 100%;
+  border-radius: 20px;
+}
+h1 {  
+  font-family: sans-serif;  
+  display: block;  
+  font-size: 1.5rem;  
+  font-weight: bold;  
+  text-align: center;  
+  letter-spacing: 3px;  
+  color: hotpink;  
+ text-transform: uppercase;  
+padding-top: 20px;  
+}  
+a {  
+  text-decoration: none;  
+  color: #fff;  
+}  
+a:hover {  
+  text-decoration: none;  
+  color: #fff;  
+}  
+.container {
+  margin-bottom: 2rem;
+}
+.container h1 {
+  color: black;
+} 

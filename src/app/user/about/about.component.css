@@ -1,0 +1,18 @@
+img{
+    width: 100vw;
+    height: 50vh;
+}
+.contact_address {
+    border-bottom: 3px solid #1c63b8;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+.maprouter{
+    display:flex;
+    width: 100%;
+    position: absolute;
+    top:0;
+    left:0;
+}

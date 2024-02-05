@@ -1,0 +1,83 @@
+<div class="wrapper login">
+  <div class="container">
+    <div class="col-left">
+      <div class="login-text">
+        <h2>Welcome🖐</h2>
+        <p>Create your account.<br />For Free!</p>
+        <a routerLink="/signup" class="btn">Sign Up</a>
+      </div>
+    </div>
+    <div class="col-right">
+      <div class="login-form">
+        <h2 style="font-size: 30px">Login</h2>
+        <form #myForm="ngForm">
+          <p>
+            <label>Username<span>*</span></label>
+            <input
+              type="text"
+              [(ngModel)]="loginModel.userName"
+              #name="ngModel"
+              name="userName"
+              placeholder="Username"
+              required
+              [class.is-invalid]="name.touched && name.invalid"
+            />
+          </p>
+
+          <div *ngIf="name.touched && name.invalid" class="text-danger">
+            <div *ngIf="name.errors && name.errors['required']">
+              UserName is Required
+            </div>
+          </div>
+
+          <p>
+            <label>Password<span>*</span></label>
+            <input
+              type="password"
+              [(ngModel)]="loginModel.password"
+              #password="ngModel"
+              name="password"
+              placeholder="Password"
+              [class.is-invalid]="name.touched && name.invalid"
+              required
+            />
+          </p>
+
+          <div *ngIf="password.touched && password.invalid" class="text-danger">
+            <div *ngIf="password.errors && password.errors['required']">
+              Password is Required
+            </div>
+          </div>
+
+          <button
+            class="btn btn-primary loginBtn"
+            *ngIf="loginBtn"
+            [disabled]="myForm.invalid"
+            (click)="login()"
+          >
+            Login
+          </button>
+          <button
+            class="btn btn-primary"
+            type="button"
+            *ngIf="loadingBtn"
+            disabled
+          >
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Logging in...
+          </button>
+
+          <p>
+            <a routerLink="/reset" style="font-size: 20px; color: black"
+              >Forgot password?</a
+            >
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

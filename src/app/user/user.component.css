@@ -1,0 +1,26 @@
+/* img {
+    width: 100vw;
+    height: 600px;
+}
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 3px;
+    background-color: black;
+    color: white;
+    height: 120px;
+    font-size: 25px;
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+} */
+footer{
+    background-color: aquamarine;
+    height: 10vh;
+}
+.main-content{
+    overflow-x: hidden;
+    width: 100vw;
+}

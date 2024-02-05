@@ -1,0 +1,186 @@
+<div class="container register-form mt-3">
+  <h1>Sign Up</h1>
+  <p class="text-center">Please fill in this form to create an account.</p>
+  <div class="form">
+    <form class="form-content" #myForm="ngForm">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <input
+              type="text"
+              [(ngModel)]="signupModel.fullName"
+              #name="ngModel"
+              name="name"
+              class="form-control"
+              placeholder="Your Name *"
+              required
+              [class.is-invalid]="name.touched && name.invalid"
+            />
+            <div *ngIf="name.touched && name.invalid" class="text-danger">
+              <div *ngIf="name.errors && name.errors['required']">
+                Name is Required
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <input
+              type="text"
+              [(ngModel)]="signupModel.userName"
+              #userName="ngModel"
+              name="username"
+              required
+              class="form-control"
+              placeholder="Your UserName *"
+              (blur)="checkIfExists('check-username', userName.value)"
+            />
+            <div *ngIf="validators.isUniqueUserName" class="text-danger">
+              <p>Username already exists please choose another one</p>
+            </div>
+            <div
+              *ngIf="userName.touched && userName.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="userName.errors && userName.errors['required']">
+                Username is Required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              [(ngModel)]="signupModel.email"
+              #email="ngModel"
+              name="email"
+              (blur)="checkIfExists('check-email', email.value)"
+              email
+              class="form-control"
+              placeholder="Your Email *"
+              name="email"
+              pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
+              required
+            />
+            <div *ngIf="validators.isUniqueEmail" class="text-danger">
+              <p>Email already exists please choose another one</p>
+            </div>
+            <div *ngIf="email.touched && email.invalid" class="text-danger">
+              <div *ngIf="email.errors && email.errors['required']">
+                Email is Required
+              </div>
+
+              <div *ngIf="email.errors && email.errors['pattern']">
+                Email pattern is invalid
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              [(ngModel)]="signupModel.phoneNumber"
+              #contactNo="ngModel"
+              (blur)="checkIfExists('check-phonenumber', contactNo.value)"
+              class="form-control"
+              name="contactNo"
+              required
+              [class.is-invalid]="contactNo.touched && contactNo.invalid"
+              placeholder="Phone ContactNo *"
+            />
+            <div
+              *ngIf="contactNo.touched && contactNo.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="contactNo.errors && contactNo.errors['required']">
+                ContactNo is Required
+              </div>
+            </div>
+            <div *ngIf="validators.isUniquePhoneNumber" class="text-danger">
+              <p>Phone Number already exists please choose another one</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <select
+            class="form-select"
+            [(ngModel)]="signupModel.gender"
+            name="gender"
+            #gender="ngModel"
+            style="border-radius: 19px; margin-bottom: 16px"
+            aria-label="Default select example"
+            [class.is-ivalid]="gender.touched && gender.invalid"
+            required
+          >
+            <option value="0">Select Your Gender</option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+          </select>
+
+          <div class="form-group">
+            <input
+              type="password"
+              [(ngModel)]="signupModel.password"
+              #password="ngModel"
+              name="password"
+              required
+              [class.is-invalid]="password.touched && password.invalid"
+              class="form-control"
+              placeholder="Your Password *"
+            />
+            <div
+              *ngIf="password.touched && password.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="password.errors && password.errors['required']">
+                Password is Required
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              [(ngModel)]="signupModel.confirmPassword"
+              #confirmPassword="ngModel"
+              name="confirmPassword"
+              class="form-control"
+              placeholder="Confirm Password *"
+              [class.is-invalid]="
+                confirmPassword.touched && confirmPassword.invalid
+              "
+              required
+            />
+
+            <div
+              *ngIf="confirmPassword.touched && confirmPassword.invalid"
+              class="text-danger"
+            >
+              <div
+                *ngIf="
+                  confirmPassword.errors && confirmPassword.errors['required']
+                "
+              >
+                Confirm your password
+              </div>
+            </div>
+          </div>
+
+          <button
+            class="btn btn-primary"
+            type="button"
+            *ngIf="signupDiv"
+            (click)="signup()"
+            [disabled]="myForm.invalid"
+          >
+            Signup
+          </button>
+          <button class="btn btn-primary" type="button" *ngIf="hello">
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Signing up...
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

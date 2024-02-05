@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="card mt-2">
+    <div class="card-body">
+      You can select your address below if any or you can add your address.
+      <button
+        class="btn btn-outline-dark"
+        routerLink="/customer/postAddress"
+        (click)="navigateAndStore()"
+      >
+        Add Your Address <i class="fa-solid fa-plus"></i>
+      </button>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="card card-margin" *ngFor="let address of addresses; index as i">
+      <div class="card-header no-border">
+        <h5 class="card-title">{{ address.state | titlecase }}</h5>
+      </div>
+      <div class="card-body pt-0">
+        <div class="widget-49">
+          <div class="widget-49-title-wrapper">
+            <div class="widget-49-date-warning">
+              <span class="widget-49-date-day">{{ i + 1 }}</span>
+            </div>
+            <div class="widget-49-meeting-info">
+              <span class="widget-49-pro-title">{{ address.street }}</span>
+              <span class="widget-49-meeting-time"
+                >Longitude: {{ address.longitute }}</span
+              >
+              <span class="widget-49-meeting-time"
+                >Latitute: {{ address.latitute }}</span
+              >
+            </div>
+          </div>
+          <ol class="widget-49-meeting-points">
+            <li class="widget-49-meeting-item">
+              <span>AddressLine: {{ address.addressLine }}</span>
+            </li>
+            <li class="widget-49-meeting-item">
+              <span>Postalcode: {{ address.postalCode }}</span>
+            </li>
+            <li class="widget-49-meeting-item">
+              <span>Region: {{ address.region }}</span>
+            </li>
+          </ol>
+          <div class="widget-49-meeting-action">
+            <button
+              class="btn btn-outline-success"
+              (click)="bookService(address.id, address.street)"
+            >
+              Book Now
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

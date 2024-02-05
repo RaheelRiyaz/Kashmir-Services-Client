@@ -1,0 +1,130 @@
+<nav class="navbar">
+  <ul>
+    <li>
+      <a
+        routerLink="adminsignup"
+        style="cursor: pointer; color: white; font-size: 20px"
+        >Add Users</a
+      >
+    </li>
+  </ul>
+</nav>
+<div class="col-lg-12 col-xl-11 mt-2">
+  <div class="card text-black" style="border-radius: 25px">
+    <div class="card-body p-md-5">
+      <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+          <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+            Add New User
+          </p>
+          <h3 class="text-danger">{{errorMessage}}</h3>
+
+          <form class="mx-1 mx-md-4" #myForm="ngForm">
+            <div class="d-flex flex-row align-items-center mb-4">
+              <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+              <div class="form-outline flex-fill mb-0">
+                <label class="form-label" for="form3Example1c">Full Name</label>
+                <input
+                  type="text"
+                  [(ngModel)]="signupModel.fullName"
+                  #fullname="ngModel"
+                  name="fullname"
+                  id="form3Example1c"
+                  class="form-control"
+                  required
+                />
+                <!-- <span *ngIf="fullname.invalid&&fullname.touched">
+                <span *ngIf="fullname.errors?.['required']" class="text-danger fs-6">
+                  *Please Enter Your Full Name
+                </span>
+              </span> -->
+              </div>
+            </div>
+
+            <div class="d-flex flex-row align-items-center mb-4">
+              <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+              <div class="form-outline flex-fill mb-0">
+                <label class="form-label" for="form3Example3c">Email</label>
+                <input
+                  type="email"
+                  [(ngModel)]="signupModel.email"
+                  #email="ngModel"
+                  name="email"
+                  id="form3Example3c"
+                  class="form-control"
+                />
+              </div>
+            </div>
+
+            <div class="d-flex flex-row align-items-center mb-4">
+              <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
+              <div class="form-outline flex-fill mb-0">
+                <label class="form-label" for="form3Example4c"> PhoneNo</label>
+                <input
+                  type="text"
+                  [(ngModel)]="signupModel.phoneNumber"
+                  #phoneNumber="ngModel"
+                  name="phoneNumber"
+                  id="form3Example4c"
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <div class="d-flex flex-row align-items-center mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30"
+                height="30"
+                style="margin-right: 10px"
+                fill="currentColor"
+                class="bi bi-person"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"
+                />
+              </svg>
+              <div class="form-outline flex-fill mb-0">
+                <label class="form-label" for="form3Example4c"> UserRole</label>
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  [(ngModel)]="signupModel.userRole"
+                  name="userRole"
+                  style="margin-top: 0px; margin-right: 51px; width: 100%"
+                >
+                  <option [ngValue]="0" selected disabled>Select Role</option>
+                  <option [ngValue]="1">Admin</option>
+                  <option [ngValue]="2">Manager</option>
+                  <option [ngValue]="3">Service Enginer</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+              <button
+                type="button"
+                class="btn btn-primary btn-lg"
+                (click)="addAdmin()"
+              >
+                Add User
+              </button>
+            </div>
+          </form>
+        </div>
+        <div
+          class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2"
+        >
+          <img
+            src="../../../assets/Admin-Profile-Vector-PNG-Picture.png"
+            class="img-fluid"
+            alt="Sample image"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- </div>
+  </div> -->
+<!-- </section> -->

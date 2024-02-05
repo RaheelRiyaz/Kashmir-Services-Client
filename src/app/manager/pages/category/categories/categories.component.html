@@ -1,0 +1,23 @@
+<div class="container mt-5 ms-2 flex-cards">
+  <div class="row d-flex flex wrap-wrap">
+    <div class="card m-3 item-card card-block" style="width: 23rem" *ngFor="let category of categories">
+      <img src="{{ baseUrl + category.filePath }}" alt="No preview" />
+      <h5 class="item-card-title mt-3 mb-3 mx-2">
+        <strong>Name</strong>: {{ category.name }}
+      </h5>
+      <p class="card-text mx-2">
+        <strong>Description</strong>: {{ category.description }}
+      </p>
+      <button class="btn btn-success mb-2" routerLink="/manager/category/engineers/{{ category.id }}">
+        View Engineers
+      </button>
+      <select class="form-select mb-2" aria-label="Default select example" [(ngModel)]="jobRole.engineerId" #input
+        (change)="assignEngineer(category.id, input.value)">
+        <option selected value="">Assign Engineer</option>
+        <option value="{{ manager.engineerId }}" *ngFor="let manager of managers">
+          {{ manager.fullName }}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,116 @@
+<nav class="navbar">
+  <ul>
+    <li>
+      <a
+        routerLink="dashboard"
+        style="cursor: pointer; color: white; font-size: 20px"
+        >Services</a
+      >
+    </li>
+  </ul>
+</nav>
+
+<div class="container">
+  <div class="table-wrapper">
+    <div class="table-title">
+      <div class="row">
+        <div class="col-sm-6">
+          <h2>Manage <b>Services</b></h2>
+        </div>
+        <div class="col-sm-6">
+          <a
+            class="btn btn-success"
+            routerLink="/admin/addService"
+            data-toggle="modal"
+            ><i class="material-icons">&#xE147;</i>
+            <span>Add New Service</span></a
+          >
+        </div>
+      </div>
+    </div>
+    <table
+      class="table table-striped table-hover"
+      *ngIf="servicesArray.length > 0; else message"
+    >
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let service of servicesArray">
+          <td>{{ service.name }}</td>
+          <td>{{ service.description }}</td>
+          <td>{{ service.charges | currency : "INR" }}</td>
+          <td>
+            <a [routerLink]="['/admin/editService', service.id]"
+              ><i class="fa fa-edit" aria-hidden="true"></i
+            ></a>
+            <a
+              ><i
+                class="fa fa-trash"
+                (click)="deleteServices(service.id)"
+                aria-hidden="true"
+              ></i
+            ></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #message>
+      <div class="alert alert-secondary" role="alert">No Service Found</div>
+    </ng-template>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a
+            class="page-link"
+            id="previous"
+            tabindex="-1"
+            (click)="nextPreviousPageToggler($event)"
+            >Previous</a
+          >
+        </li>
+        <li class="page-item">
+          <a
+            #page
+            class="page-link activePage"
+            data-custom-attribute="1"
+            (click)="fetchPageWize($event)"
+            >1</a
+          >
+        </li>
+        <li class="page-item">
+          <a
+            #page
+            class="page-link"
+            data-custom-attribute="2"
+            (click)="fetchPageWize($event)"
+            >2</a
+          >
+        </li>
+        <li class="page-item">
+          <a
+            #page
+            class="page-link"
+            data-custom-attribute="3"
+            (click)="fetchPageWize($event)"
+            >3</a
+          >
+        </li>
+        <li class="page-item">
+          <a
+            class="page-link"
+            id="next"
+            data-custom-attribute="4"
+            (click)="nextPreviousPageToggler($event)"
+            >Next</a
+          >
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

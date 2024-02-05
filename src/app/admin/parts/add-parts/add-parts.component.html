@@ -1,0 +1,191 @@
+<div class="row justify-content-center container1 mt-5 mx-3">
+    <div class="mb-3">
+      <a routerLink="/admin/brands" class="text-primary" style="cursor: pointer">
+        <button class="btn btn-dark mx-4">Go Back</button>
+      </a>
+    </div>
+    <div class="col-lg-9">
+      <h1 class="mb-3 text-center" style="font-size: 25px">
+        <u>Add Parts</u>
+      </h1>
+      <!-- (blur)="checkBrandName(brandName.value)" -->
+      <form #myForm="ngForm" (ngSubmit)="addPart()">
+        <div class="row g-3">
+          <div class="col-md-12">
+            <div class="row">
+                <div class="col-6">
+                    <label for="your-name" class="form-label">Part Name:</label>
+                    <input
+                      type="text"
+                      name="name"
+                      #partName="ngModel"
+                      [(ngModel)]="parts.name"
+                    
+                      class="form-control"
+                      id="your-name"
+                      required
+                    />
+                    <div *ngIf="partName.invalid&&partName.touched">
+                    <div *ngIf="partName.errors?.['required']" class="text-danger fs-6">*Please Mention Your Part Name</div>
+                    </div>
+                   
+                </div>
+                <div class="col-6">
+                    <label for="your-name" class="form-label">Part Number:</label>
+                    <input
+                      type="text"
+                      name="name"
+                      #partNo="ngModel"
+                      [(ngModel)]="parts.partNo"
+                    
+                      class="form-control"
+                      id="your-name"
+                      required
+                    />
+                    <div *ngIf="partNo.invalid&&partNo.touched">
+                    <div *ngIf="partNo.errors?.['required']" class="text-danger fs-6">*Please Mention Your Part Number</div>
+                    </div>
+                   
+                </div>
+           
+           
+          </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-6">
+                    <label for="serialNo" class="form-label">Serial Number:</label>
+                    <input
+                      type="text"
+                      name="serialNo"
+                      #serialNo="ngModel"
+                      [(ngModel)]="parts.serialNo"
+                    
+                      class="form-control"
+                      id="serialNo"
+                      required
+                    />
+                    <div *ngIf="serialNo.invalid&&serialNo.touched">
+                    <div *ngIf="serialNo.errors?.['required']" class="text-danger fs-6">*Please Mention Serial Number</div>
+                    </div>
+                 
+                </div>
+                <div class="col-6 ">
+                    <label for="brand" class="form-label">Brand</label>
+
+                    <select
+                    name="brand"
+                      class="form-select"
+                      aria-label="Default select example"
+                      required
+                      [(ngModel)]="parts.brandId"
+                      #brand="ngModel"
+                      #select
+                      (change)="addBrand(select.value)"
+                    >
+                      <option selected disabled>Select Brand</option>
+                      <option value="" *ngFor="let brand of brands" value="{{brand.id}}">{{brand.name}} / {{brand.categoryName}}</option>
+                    </select>
+                  </div>
+
+                 
+                  </div>
+                  </div>
+           
+           
+         
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-6">
+                    <label for="purchasePrice" class="form-label">Purchase Price</label>
+                    <input
+                      type="number"
+                      name="purchasePrice"
+                      #purchasePrice="ngModel"
+                      [(ngModel)]="parts.purchasePrice"
+                    
+                      class="form-control"
+                      id="purchasePrice"
+                      required
+                    />
+                    <div *ngIf="purchasePrice.invalid&&purchasePrice.touched">
+                    <div *ngIf="purchasePrice.errors?.['required']" class="text-danger fs-6">*Please Mention Purchase Price</div>
+                    </div>
+                   
+                </div>
+                <div class="col-6">
+                    <label for="sellPrice" class="form-label">Selling Price:</label>
+                    <input
+                      type="number"
+                      name="sellPrice"
+                      #sellPrice="ngModel"
+                      [(ngModel)]="parts.sellPrice"
+                    
+                      class="form-control"
+                      id="your-name"
+                      required
+                    />
+                    <div *ngIf="sellPrice.invalid&&sellPrice.touched">
+                    <div *ngIf="sellPrice.errors?.['required']" class="text-danger fs-6">*Please Mention Sell Price</div>
+                    </div>
+                   
+                </div>
+           
+           
+          </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-6">
+                    <label for="quantity" class="form-label">Quantity</label>
+                    <input
+                      type="number"
+                      name="quantity"
+                      #quantity="ngModel"
+                      [(ngModel)]="parts.quantity"
+                    
+                      class="form-control"
+                      id="quantity"
+                      required
+                    />
+                    <div *ngIf="quantity.invalid&&quantity.touched">
+                    <div *ngIf="quantity.errors?.['required']" class="text-danger fs-6">*Please Mention Quantity</div>
+                    </div>
+                   
+                </div>
+                
+           
+           
+          </div>
+        </div>
+          <div class="col-md-12">
+            <label for="your-message" class="form-label">Description</label>
+            <textarea
+              class="form-control"
+              [(ngModel)]="parts.description"
+              #description="ngModel"
+              name="description"
+              id="your-message"
+              rows="4"
+              required
+            ></textarea>
+            
+          </div>
+        
+  
+          <div class="col-12">
+            <div class="row">
+                <div class="col-3"></div>
+              <div class="col-md-6">
+                <button class="btn btn-success w-100 fw-bold mt-3"  [disabled]="myForm.invalid">
+                  Add Part
+                </button>
+              </div>
+            </div>
+          </div> </div>
+      </form>
+    </div>
+  </div>
+  

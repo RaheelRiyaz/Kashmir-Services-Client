@@ -1,0 +1,97 @@
+<header>
+  <button
+    class="btn btn-success float-right m-2"
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal"
+  >
+    Add New Brand
+  </button>
+</header>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Category</th>
+      <th scope="col">Brand</th>
+      <th scope="col">Parts</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let brand of brands">
+      <th>{{ brand.categoryName }}</th>
+      <th>{{ brand.name }}</th>
+      <td>
+        <button
+          class="btn btn-success"
+          routerLink="/admin/category/parts/{{ brand.id }}"
+        >
+          Parts
+        </button>
+      </td>
+      <td>
+        <i class="fa-solid fa-trash" (click)="deleteBrand(brand.id)"></i>
+        <i class="fa-solid fa-pen ms-2"></i>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">New Brand</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            placeholder="Name"
+            [(ngModel)]="newBrand.name"
+            #brand
+            (blur)="checkBrandName(brand.value)"
+          />
+          <label for="name">Name</label>
+        </div>
+        <div *ngIf="checkBrands" class="text-danger">
+          <p>Brands Already Exists.please choose Another one</p>
+        </div>
+        <div class="form-floating">
+          <textarea
+            class="form-control"
+            placeholder="Description"
+            name="description"
+            id="desc"
+            [(ngModel)]="newBrand.description"
+          ></textarea>
+          <label for="desc">Description</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" (click)="addBrand()">
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

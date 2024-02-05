@@ -1,0 +1,188 @@
+<div>
+  <h1 class="alert alert-info text-center">Visits</h1>
+  <div
+    style="display: flex; justify-content: space-around"
+    *ngIf="
+      (callStatus == 'Open' || callStatus == 'reallocated') && visits.length > 0
+    "
+  >
+    <p style="font-size: 12pt" class="text-center">
+      <span style="-aw-import: ignore"
+        >&nbsp;
+        <div>
+          <label class="me-4">Close Call: </label>
+          <label class="switch">
+            <input
+              #chkBox
+              type="checkbox"
+              checked="{{
+                callStatus == 'Open'
+                  ? 'checked'
+                  : callStatus == 'reallocated'
+                  ? 'checked'
+                  : ''
+              }}"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+             
+            />
+            <!-- (change)="closeCall(visitReport.assingedEngineerId)" -->
+
+            <span class="slider round"> </span>
+          </label>
+        </div>
+      </span>
+    </p>
+    <p style="font-size: 12pt" class="text-center">
+      <span style="-aw-import: ignore"
+        >&nbsp;
+        <div *ngIf="basicInvoice == null; else elseInvoice">
+          <label class="me-4 switch"> Generate : </label>
+          <button
+            class="btn btn-outline-info ms-2 "
+            routerLink="/engineer/invoice/{{ callBookingId }}/{{
+              totalDistance
+            }}"
+            (click)="generateInvoice()"
+          >
+            Invoice
+          </button>
+        </div>
+        <ng-template #elseInvoice>
+        <div>
+            <button
+              class="btn btn-outline-info ms-2 mt-2"
+              routerLink="/engineer/invoice/{{ basicInvoice?.id }}/{{ callBookingId }}"
+            >
+           Invoice  No: {{ basicInvoice?.invoiceNo }}
+            </button>
+        </div>
+      </ng-template>
+      </span>
+    </p>
+  </div>
+  <div>
+    <table class="table table-hover mt-5">
+      <thead>
+        <tr>
+          <td>Serial No</td>
+          <td>Date</td>
+          <td>Time in</td>
+          <td>Time out</td>
+          <td>Total Distance</td>
+          <td>Remarks</td>
+          <td>Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let visit of visits; index as i">
+          <td>{{ i + 1 }}</td>
+          <td>{{ visit.visitDate | date }}</td>
+          <td>{{ visit.timeIn }}</td>
+          <td>{{ visit.timeOut }}</td>
+          <td>{{ visit.technicalRemarks }}</td>
+          <td>{{ visit.totalDistance }}</td>
+          <td *ngIf="callStatus == 'Open' || callStatus == 'reallocated'">
+            <button (click)="deleteVisit(visit.id)">
+              <span class="text-danger fa fa-trash-can"> </span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="callStatus == 'Open' || callStatus == 'reallocated'" class="body">
+    <div class="job-details">
+      <div class="property">
+        <label for="visitDate">Date:</label>
+        <input
+          type="date"
+          class="form-control"
+          id="visitDate"
+          placeholder="Date"
+          #visitDate
+          (change)="getEnteringDate(visitDate.value)"
+        />
+      </div>
+
+      <div class="property">
+        <label for="timeIn">Time In:</label>
+        <input
+          type="time"
+          class="form-control"
+          id="timeInHour"
+          placeholder="Hour"
+          #inhourMinutes
+          (change)="getEnteringTime(inhourMinutes.value)"
+        />
+      </div>
+
+      <div class="property">
+        <label for="timeOut">Time Out:</label>
+        <input
+          type="time"
+          class="form-control"
+          id="timeOutHour"
+          placeholder="Hour"
+          #outhourMinutes
+          (change)="getClosingTime(outhourMinutes.value)"
+        />
+      </div>
+
+      <div class="property">
+        <label for="technicalRemarks">Technical Remarks:</label>
+        <textarea
+          name="technicalRemarks"
+          id=""
+          cols="30"
+          rows="10"
+          class="form-control"
+          placeholder="Technical Remarks"
+          [(ngModel)]="visitReport.technicalRemarks"
+        ></textarea>
+      </div>
+
+      <div class="property">
+        <label for="totalDistance">Total Distance:</label>
+        <input
+          type="number"
+          class="form-control"
+          name="totalDistance"
+          placeholder="Total Distance"
+          [(ngModel)]="visitReport.totalDistance"
+        />
+      </div>
+
+      <button class="btn btn-success" (click)="submitReport()">
+        Submit Report
+      </button>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+         Enter Code 
+        </h1>
+      </div>
+      <div class="modal-body d-flex justify-content-center">
+        
+        <input type="text" name="" #codetxt>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="submitCode(codetxt.value)">
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

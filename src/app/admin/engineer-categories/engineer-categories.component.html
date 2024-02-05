@@ -1,0 +1,40 @@
+<div class="container mt-5 ms-2 flex-cards">
+  <div
+    class="row d-flex flex wrap-wrap"
+    *ngIf="categories.length > 0; else noCategory"
+  >
+    <div
+      class="card m-3 item-card card-block"
+      style="width: 23rem"
+      *ngFor="let category of categories"
+    >
+      <img src="{{ baseUrl + category.filePath }}" alt="No preview" />
+      <h5 class="item-card-title mt-3 mb-3 mx-2">
+        <strong>Name</strong>: {{ category.name }}
+      </h5>
+      <p class="card-text mx-2">
+        <strong>Description</strong>: {{ category.description }}
+      </p>
+      <button
+        class="btn btn-success mb-2"
+        routerLink="/admin/category/brands/{{ category.id }}"
+      >
+        View Brands
+      </button>
+      <!-- <div style="margin-left: 80px" class="mb-3 myDiv">
+          <button
+            class="btn btn-primary me-2"
+            (click)="deleteCategory(category.id)"
+          >
+            Delete
+          </button>
+          <button class="btn btn-dark" (click)="editCategory(category.id)">
+            Edit
+          </button>
+        </div> -->
+    </div>
+  </div>
+  <ng-template #noCategory>
+    <h3 class="alert alert-danger">No category Found</h3>
+  </ng-template>
+</div>

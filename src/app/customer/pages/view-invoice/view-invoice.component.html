@@ -1,0 +1,110 @@
+<div class="container" *ngIf="invoiceBasicDetails != null; else elseBlock">
+    <h1 class="alert alert-info text-center">Invoice Details</h1>
+    <div class="row">
+      <div class="col-2">
+        <button *ngIf="!invoiceBasicDetails.isPaid" class="btn btn-outline-info" (click)="payInvoice()" >Pay Now</button>
+      </div>
+
+    </div>
+
+    <div class="d-flex flex-wrap " *ngIf="invoiceBasicDetails; else noInvoiceBlock">
+    <table class="table table-hover mt-5">
+      <tbody>
+        <tr>
+          <td>Name</td>
+          <td>ContactNo</td>
+          <td>Job No</td>
+          <td>Invoice No</td>
+          <td>Invoice Date</td>
+        </tr>
+
+        <tr>
+          <td>{{invoiceBasicDetails.fullName}}</td>
+          <td>{{invoiceBasicDetails.phoneNumber}}</td>
+          <td>{{invoiceBasicDetails.jobNo}}</td>
+          <td>{{invoiceBasicDetails.invoiceNo}}</td>
+          <td>{{invoiceBasicDetails.invoiceDate |date}}</td>
+        </tr>
+
+        <tr>
+          <td>Service Type</td>
+          <td>Basic Charges</td>
+          <td>Free Service Distance</td>
+          <td>Perkilometer Charges</td>
+          <td>Total Distance</td>
+        </tr>
+
+        <tr>
+          <td>{{invoiceBasicDetails.serviceType}}</td>
+          <td>{{invoiceBasicDetails.charges}}</td>
+          <td>{{invoiceBasicDetails.freeServiceDistance}}</td>
+          <td>{{invoiceBasicDetails.perKilometerCharge}}</td>
+          <td>{{invoiceBasicDetails.totalDistance}}</td>
+
+        </tr>
+
+      </tbody>
+    </table>
+    <div class="mt-5"><h1 class="alert alert-info text-center">Particulars</h1>
+    <table class="table table-hover mt-5">
+      <thead>
+        <tr>
+          <td>Serial No</td>
+          <td>Brand</td>
+          <td>Part</td>
+          <td>PartNo</td>
+          <td>Serial No</td>
+          <td>Sell Price</td>
+          <td>Total</td>
+        </tr>
+      </thead>
+      <tr *ngFor="let item of invoiceBasicDetails?.invoiceDetails; index as i">
+        <td>{{i+1}}</td>
+        <td>{{item.brandName}}</td>
+        <td>{{item.partName}}</td>
+        <td>{{item.partNo}}</td>
+        <td>{{item.serialNo}}</td>
+        <td>{{item.sellPrice}}</td>
+        <td>{{item.sellPrice}}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Total Product Price</td>
+        <td>{{invoiceBasicDetails.totalItemPrice}}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Total Distance Charges</td>
+        <td>{{invoiceBasicDetails.totalDistancePrice}}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Grand Total</td>
+        <td>{{invoiceBasicDetails.grandTotal}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+  <ng-template #noInvoiceBlock>
+    <div class="alert alert-danger">
+      No Invoice Found
+    </div>
+  </ng-template>
+  </div>
+
+
+<ng-template #elseBlock>
+  <div class="alert alert-danger">No Invoice Found</div>
+</ng-template>

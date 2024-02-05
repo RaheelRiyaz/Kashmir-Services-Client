@@ -1,0 +1,172 @@
+<div class="container">
+    <div class="main-body row">
+  
+      <!-- Breadcrumb -->
+      <nav aria-label="breadcrumb" class="bg-light col-12 rounded-3 p-3 my-4">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
+          <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+        </ol>
+      </nav>
+      <!-- /Breadcrumb -->
+  
+      <div class="row gutters-sm">
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex flex-column align-items-center text-center">
+                <img src={{baseUrl+userProfile.filePath}} alt="Admin" class="rounded-circle" width="150">
+                <div class="mt-3">
+                  <h4>{{userProfile.username | titlecase}}</h4>
+                  <p class="text-black mb-1">{{userProfile.email}}</p>
+                  <p class="text-black font-size-lg">{{userProfile.userRole | titlecase}}</p>
+                  <button type="button" class="btn btn-outline-primary mx-2" data-bs-toggle="modal"
+                    data-bs-target="#updateModal" (click)="presentData()">Edit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Full Name</h6>
+                </div>
+                <div class="col-sm-9 text-dark">
+                  {{userProfile.fullName | uppercase}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Email</h6>
+                </div>
+                <div class="col-sm-9 text-dark">
+                  {{userProfile.email}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Phone</h6>
+                </div>
+                <div class="col-sm-9 text-dark">
+                  +91 {{userProfile.phoneNumber}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">E-Mail Verification</h6>
+                </div>
+                <div class="col-sm-9 text-dark">
+                  {{userProfile.isEmailVerified|emailverification}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Gender</h6>
+                </div>
+                <div class="col-sm-9 text-dark">
+                  {{userProfile.gender | titlecase}}
+                </div>
+              </div>
+              <hr>
+  
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row" *ngIf="addresses.length > 0 ; else elseCard">
+          <div class="col-sm-4 mb-3 justify-content-between" *ngFor="let address of addresses">
+            <div class="card h-100">
+              <div class="card-body">
+                <h6 class="d-flex align-items-center mb-3 fs-3">Address</h6>
+                <small class="fs-3 text-dark">State</small>
+                <div class=" mb-3" style="height: 5px">
+                  <div>{{address.state | titlecase}}</div>
+                </div>
+                <small class="fs-4 text-dark">City</small>
+                <div class=" mb-3" style="height: 5px">
+                  <div>{{address.city | titlecase}}</div>
+                </div>
+                <small class="fs-5 text-dark">Region</small>
+                <div class=" mb-3" style="height: 5px">
+                  <div>{{address.region | titlecase}}</div>
+                </div>
+                <small class="fs-6 text-dark">Address Line</small>
+                <div class=" mb-3" style="height: 5px">
+                  <div>{{address.addressLine | titlecase}}</div>
+                </div>
+                <small class="fs-6 text-dark">Postal Code</small>
+                <div class=" mb-3" style="height: 5px">
+                  <div>{{address.postalCode}}</div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <ng-template #elseCard >
+    <p class="alert alert-danger" role="alert">Sorry No Address Found</p>
+  </ng-template>
+
+  
+  <!-- Modal For UPDATE PROFILE -->
+  <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true"
+  data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Profile</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!-- <div class="modal-body">
+        <label for="Upload" class="form-label">Upload Profile</label>
+        <input type="file" name="" id="" placeholder="Upload Profile Image" class="form-control" accept=".jpg , .jpeg, .png" (change)="profilePic($event)">
+      </div> -->
+      <form action="" #updateProfileForm="ngForm" (ngSubmit)="updateProfileData($event)">
+        <div class="modal-body">
+            <input type="file" name="File" id="" placeholder="Upload Profile Image" class="form-control mb-2"
+              accept=".jpg , .jpeg, .png">
+          <div class="form-floating mb-2">
+
+            <input type="text" name="FullName" id="" placeholder="Full Name" class="form-control"
+              [(ngModel)]="updateProfile.FullName">
+            <label for="FullName">FullName</label>
+          </div>
+          <div class="form-floating my-2">
+            <input type="text" name="Email" id="" placeholder="Email" class="form-control"
+              [(ngModel)]="updateProfile.Email">
+            <label for="Email">Email</label>
+          </div>
+          <div class="form-floating my-2">
+            <input type="text" name="PhoneNumber" id="" placeholder="Phone Number" class="form-control"
+              [(ngModel)]="updateProfile.PhoneNumber">
+            <label for="PhoneNumber">PhoneNumber</label>
+          </div>
+          <div class="form-floating my-2">
+            <select type="text" name="Gender" placeholder="Gender" #gender class="form-select"
+              [(ngModel)]="updateProfile.Gender">
+              <option value="1">Male</option>
+              <option value="2">Female</option>
+            </select>
+            <label for="Gender">Gender</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

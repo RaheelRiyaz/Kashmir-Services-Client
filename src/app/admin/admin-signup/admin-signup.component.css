@@ -1,0 +1,18 @@
+.navbar{
+    height: 3rem;
+    background: rgb(20 27 30);
+    width: 100%;
+    margin-right: 200px;
+}
+.navbar ul li a{
+    text-decoration: none;
+    list-style: none;
+}
+
+
+.col-lg-12 {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-top: 10px;
+}

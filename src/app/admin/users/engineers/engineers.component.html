@@ -1,0 +1,95 @@
+<div class="filter-section">
+  <input class="form-control" type="search" autocapitalize name="term" placeholder="Search by Name or Phone" (input)="filterUsers($event)">
+</div>
+
+<table class="table" *ngIf="users.length>0;else alertBox">
+  <thead>
+    <tr>
+      <th scope="col">Fullname</th>
+      <th scope="col">Email</th>
+      <th scope="col">Contact</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Status</th>
+      <th scope="col">Categories</th>
+      <th scope="col">Jobsheets</th>
+      <!-- <th scope="col">Edit</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let u of users">
+      <td>{{ u.fullName }}</td>
+      <td>{{ u.email }}</td>
+      <td>{{ u.phoneNumber }}</td>
+      <td>{{ u.gender }}</td>
+      <td>{{ u.userStatus }}</td>
+      <td  routerLink="/admin/category/jobroles/{{u.id}}"><span class="fa fa-eye"></span></td>
+      <!-- <td  routerLink="/admin/category/jobroles/{{u.id}}"><span class="fa fa-eye"></span></td> -->
+      <td  routerLink="/admin/engineer-jobsheets/{{u.id}}"><span class="fa fa-eye"></span></td>
+
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #alertBox>
+  <div class="alert alert-primary" role="alert">
+    No Engineers Found!
+  </div>
+</ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <app-user [user]="'engineers'"></app-user> -->
+
+<!-- <div class="filter-section">
+  <input class="form-control" type="search" autocapitalize name="term" placeholder="Search by Name or Phone" (input)="filterUsers($event)">
+</div>
+
+<table class="table" *ngIf="engineers.length>0;else alertBox">
+  <thead>
+    <tr>
+      <th scope="col">Fullname</th>
+      <th scope="col">Email</th>
+      <th scope="col">Contact</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Job Role</th>
+      <th scope="col">Manager Name</th>
+      <th scope="col">Description</th>
+      <th scope="col" >Categories</th>
+       <th scope="col">Edit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let eng of engineers">
+      <td>{{ eng.fullName }}</td>
+      <td>{{ eng.email }}</td>
+      <td>{{ eng.phoneNumber }}</td>
+      <td>{{ eng.gender }}</td>
+      <td>{{ eng.jobRole }}</td>
+      <td>{{ eng.managerName }}</td>
+      <td>{{ eng.description }}</td>
+      <td  routerLink="categories/{{eng.engineerId}}"><span class="fa fa-eye"></span></td>
+       <td routerLink="engineers/{{u.id}}"><span class="fa fa-eye"></span></td> -->
+      <!-- <td routerLink="/admin/us/edit/{{u.id}}"><i class="fa-solid fa-pen me-2"></i></td> -->
+    <!-- </tr>
+  </tbody>
+</table>
+
+<ng-template #alertBox>
+  <div class="alert alert-primary" role="alert">
+    No u Found!
+  </div>
+</ng-template> -->
+
